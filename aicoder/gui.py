@@ -17,6 +17,17 @@ from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 from typing import Optional
 
+# Give the app its own Windows taskbar identity *before* any window is
+# created — otherwise the taskbar keeps grouping us under pythonw.exe
+# and shows the Python icon no matter what the window icon is.
+if os.name == "nt":
+    try:
+        import ctypes
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(
+            "AutoAgent.Desktop.App")
+    except Exception:
+        pass
+
 
 # ═══════════════════════════════════════════════════════════════════
 # ── PREMIUM DARK PALETTE ──────────────────────────────────────────
@@ -378,18 +389,11 @@ class AICoderApp:
     def _set_taskbar_icon(root):
         """Set the taskbar/titlebar icon from logo.png.
 
-        Windows shows the host process (pythonw) icon unless we both
-        declare our own AppUserModelID and hand the window a real .ico.
+        Tk's Windows icon loader only understands classic BMP-format
+        .ico files (PNG-compressed entries are rejected), so we build
+        one pixel-by-pixel and hand it to every toplevel.
         """
         import math
-        # 1) Detach from pythonw's taskbar identity → our own app identity
-        if os.name == "nt":
-            try:
-                import ctypes
-                ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(
-                    "AutoAgent.Desktop.App")
-            except Exception:
-                pass
         logo_path = Path(__file__).resolve().parent / "logo.png"
         if logo_path.exists():
             try:
@@ -401,26 +405,10 @@ class AICoderApp:
                 root._icon_img = icon
                 root._icon_src = img  # keep reference
                 root.iconphoto(True, icon)
-                # 2) Real .ico for the Windows taskbar (PNG-in-ICO container)
+                # Real BMP-format .ico for the Windows taskbar
                 if os.name == "nt":
                     try:
-                        ico_path = Path.home() / ".autoagent_icon.ico"
-                        stale = (not ico_path.exists() or
-                                 ico_path.stat().st_mtime < logo_path.stat().st_mtime)
-                        if stale:
-                            big_factor = max(1, (w + 255) // 256)
-                            big = img.subsample(big_factor, big_factor)
-                            tmp_png = Path.home() / ".autoagent_icon.png"
-                            big.write(str(tmp_png), format="png")
-                            png = tmp_png.read_bytes()
-                            import struct
-                            bw, bh = big.width(), big.height()
-                            header = struct.pack("<HHH", 0, 1, 1)
-                            entry = struct.pack("<BBBBHHII", bw % 256, bh % 256,
-                                                0, 0, 1, 32, len(png), 22)
-                            ico_path.write_bytes(header + entry + png)
-                            tmp_png.unlink(missing_ok=True)
-                        root.iconbitmap(default=str(ico_path))
+                        AICoderApp._apply_windows_ico(root, img, logo_path)
                     except Exception:
                         pass
                 return
@@ -455,6 +443,65 @@ class AICoderApp:
                         img.put("#00e5ff", (nx+dx2, ny+dy2))
         root._icon_img = img
         root.iconphoto(True, img)
+
+    @staticmethod
+    def _apply_windows_ico(root, img, logo_path):
+        """Build a classic BMP-format .ico from the logo and apply it.
+
+        Each frame is written as a 32-bit BGRA bitmap with an AND mask
+        — the only encoding Tk's iconbitmap accepts on Windows.
+        """
+        import struct
+        ico_path = Path.home() / ".autoagent.ico"
+        legacy = Path.home() / ".autoagent_icon.ico"  # old PNG-in-ICO cache (invalid)
+        if legacy.exists():
+            try:
+                legacy.unlink()
+            except Exception:
+                pass
+        stale = (not ico_path.exists() or
+                 ico_path.stat().st_mtime < logo_path.stat().st_mtime)
+        if stale:
+            w = img.width()
+            frames = []
+            for target in (16, 32, 48):
+                f = max(1, round(w / target))
+                frames.append(img.subsample(f, f))
+            entries, blobs = [], []
+            offset = 6 + 16 * len(frames)
+            for ph in frames:
+                fw, fh = ph.width(), ph.height()
+                mask_row_len = ((fw + 31) // 32) * 4
+                xor, mask = bytearray(), bytearray()
+                for y in range(fh - 1, -1, -1):  # BMP rows are bottom-up
+                    mrow = bytearray(mask_row_len)
+                    for x in range(fw):
+                        try:
+                            tr = ph.tk.call(ph.name, "transparency", "get", x, y)
+                            tr = bool(int(tr))
+                        except Exception:
+                            tr = False
+                        if tr:
+                            xor += b"\x00\x00\x00\x00"
+                            mrow[x // 8] |= 0x80 >> (x % 8)
+                        else:
+                            px = ph.get(x, y)
+                            if isinstance(px, str):
+                                r, g, b = (int(v) for v in px.split())
+                            else:
+                                r, g, b = px[0], px[1], px[2]
+                            xor += bytes((b, g, r, 255))
+                    mask += mrow
+                hdr = struct.pack("<IiiHHIIiiII", 40, fw, fh * 2, 1, 32, 0,
+                                  len(xor) + len(mask), 0, 0, 0, 0)
+                blob = hdr + bytes(xor) + bytes(mask)
+                entries.append(struct.pack("<BBBBHHII", fw % 256, fh % 256,
+                                           0, 0, 1, 32, len(blob), offset))
+                blobs.append(blob)
+                offset += len(blob)
+            ico_path.write_bytes(struct.pack("<HHH", 0, 1, len(frames)) +
+                                 b"".join(entries) + b"".join(blobs))
+        root.iconbitmap(default=str(ico_path))
 
     # ── Config ────────────────────────────────────────────────
     def _load_config(self):

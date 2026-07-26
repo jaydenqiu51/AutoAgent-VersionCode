@@ -1,10 +1,19 @@
+<div align="center">
+
+<img src="aicoder/logo.png" alt="AICoder logo" width="140"/>
+
 # AI Coding Agent Framework
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![Status: Alpha](https://img.shields.io/badge/status-alpha-orange.svg)]()
+[![Providers: 14](https://img.shields.io/badge/LLM_providers-14-8A2BE2.svg)]()
 
-A modular, extensible Python framework for building self-improving AI coding agents. Give it a goal and it will audit your project, build a prioritized roadmap, then autonomously implement improvements in a continuous loop — testing, measuring, and reprioritizing after each change.
+**A self-improving AI coding agent with a premium desktop dashboard.**
+Give it a goal — it audits your project, builds a roadmap, then autonomously
+implements, tests, and measures improvements in a continuous loop.
+
+</div>
 
 ## The Flow
 
@@ -35,25 +44,40 @@ This creates a self-improving development loop.
 ## Features
 
 - **Self-Improving Engine** — Continuous audit → roadmap → implement → test → measure → repeat loop
+- **Premium Desktop App** — Dark neon dashboard with 8 pages: Dashboard, Projects, Agents, Agent Activity, Code Explorer, Metrics, Tools, Settings
+- **Live Monitoring** — Real-time quality gauges, CPU/RAM meters, activity feed with search, sparkline charts, toast notifications
 - **Comprehensive Auditor** — Analyzes 16 categories (graphics, physics, AI, vehicles, world, optimization, UI, audio, etc.)
 - **Prioritized Roadmap** — Impact-scored backlog with dependency tracking and automatic reprioritization
 - **Quality Metrics** — Tracks quality over time with category-level scoring, trend analysis, and target thresholds
 - **Test Validator** — Verifies improvements don't break the project (custom test functions, file checks, command checks)
-- **Pluggable LLMs** — OpenAI (GPT-4o), Anthropic (Claude), and Ollama (local models)
+- **14 Pluggable LLM Providers** — OpenAI, Anthropic, Gemini, Ollama, DeepSeek, Groq, Together, Fireworks, Perplexity, xAI, OpenRouter, Qwen, Kimi, GLM
 - **Extensible Tools** — File I/O, shell execution, regex/grep search, glob file matching, git operations
 - **Safety First** — Shell sandboxing blocks dangerous commands; file writes restricted to workspace
 - **pip-Installable** — Single command install with `aicoder` CLI entry point
 
 ## Quickstart
 
-### Option A: Download & Double-Click (Windows)
+### Option A: Download & Double-Click (Windows — easiest)
+
+1. Click the green **Code** button above → **Download ZIP**
+2. Extract the ZIP anywhere
+3. Double-click **`run.bat`**
+   - First run: dependencies install automatically (takes ~1 minute)
+   - Every run after: the app opens instantly, no console window
+4. Click ⚙ Settings, pick a provider, paste your API key, set a goal, press **▶ Run**
+
+> **"Publisher cannot be verified"?** That's standard Windows behavior for files
+> downloaded from the internet — click **Run**. You only need Python installed
+> ([python.org](https://python.org), tick "Add Python to PATH").
+
+### Option B: Standalone .exe (no Python needed)
 
 1. Go to [Releases](https://github.com/jaydenqiu51/Ai-Coding-Agent-Framework/releases)
 2. Download **AICoder.exe**
 3. Double-click it — the desktop app opens immediately, no install needed
 4. Enter your API key, set a goal, and click **Start Engine**
 
-### Option B: Launch Desktop App from Source
+### Option C: Launch Desktop App from Source
 
 ```bash
 git clone https://github.com/jaydenqiu51/Ai-Coding-Agent-Framework.git
@@ -62,7 +86,7 @@ pip install -e .
 aicoder --gui
 ```
 
-### Option C: CLI from Source
+### Option D: CLI from Source
 
 ```bash
 # 1. Install
@@ -116,6 +140,9 @@ Output goes to `dist/AICoder.exe` — a single file you can share or put on a US
 | **Perplexity** | Sonar Large | $1/M + search | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-2 | $2/M | [x.ai/api](https://x.ai/api) |
 | **OpenRouter** | 100+ models | From FREE | [openrouter.ai/keys](https://openrouter.ai/keys) |
+| **Qwen (Alibaba)** | qwen-plus, qwen-max | ~$0.4/M | [dashscope.aliyun.com](https://dashscope.console.aliyun.com) |
+| **Kimi (Moonshot)** | moonshot-v1-8k | ~$0.2/M | [platform.moonshot.cn](https://platform.moonshot.cn) |
+| **GLM (Zhipu AI)** | glm-4-flash | Free tier! | [open.bigmodel.cn](https://open.bigmodel.cn) |
 
 ### Environment Variables
 
@@ -258,9 +285,12 @@ Ai-Coding-Agent-Framework/
 ├── LICENSE
 ├── setup.py
 ├── build.py                    # PyInstaller packaging → standalone .exe
+├── run.bat                     # Windows launcher (auto-installs deps on first run)
+├── run.pyw                     # Zero-console launcher (double-click)
 ├── aicoder/
 │   ├── cli.py                  # CLI: --gui, --continuous, --interactive
-│   ├── gui.py                  # Desktop app (tkinter) — live log, quality chart, roadmap
+│   ├── gui.py                  # Premium desktop dashboard (tkinter) — 8 pages, live gauges
+│   ├── logo.png                # App icon / emblem
 │   ├── config.py               # Env-var configuration
 │   ├── core/
 │   │   ├── agent.py            # Single-task ReAct agent

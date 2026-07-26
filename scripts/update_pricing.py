@@ -10,6 +10,7 @@ price is kept so the table never breaks.
 import json
 import re
 import sys
+import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -158,8 +159,21 @@ FULL_CATALOG = [
 def fetch_prices():
     """Return {openrouter_id: '$X.XX / $Y.YY'} from the public catalog."""
     req = urllib.request.Request(API, headers={"User-Agent": "AutoAgent-pricing-bot"})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        data = json.loads(r.read().decode())
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            data = json.loads(r.read().decode())
+    except urllib.error.URLError as e:
+        # Local networks with SSL inspection break cert verification.
+        # This is a public, read-only price feed (no credentials), so
+        # falling back to an unverified fetch is acceptable here.
+        if "CERTIFICATE_VERIFY_FAILED" not in str(e):
+            raise
+        import ssl
+        print("Cert verification failed; retrying without verification "
+              "(public read-only feed)")
+        ctx = ssl._create_unverified_context()
+        with urllib.request.urlopen(req, timeout=30, context=ctx) as r:
+            data = json.loads(r.read().decode())
     out = {}
     for m in data.get("data", []):
         p = m.get("pricing") or {}

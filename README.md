@@ -127,22 +127,37 @@ Output goes to `dist/AICoder.exe` — a single file you can share or put on a US
 
 ## Supported LLM Providers
 
-| Provider | Model | Cost | How to Get a Key |
-|----------|-------|------|-------------------|
-| **OpenAI** | gpt-4o, gpt-4o-mini | $$ | [platform.openai.com](https://platform.openai.com) |
-| **Anthropic** | claude-3-5-sonnet | $$ | [console.anthropic.com](https://console.anthropic.com) |
-| **Google Gemini** | gemini-2.5-flash | Free tier! | [aistudio.google.com](https://aistudio.google.com/apikey) |
-| **Ollama** | codellama, llama3, etc. | Free (local) | [ollama.com](https://ollama.com) |
-| **DeepSeek** | deepseek-chat | ~$0.14/M | [platform.deepseek.com](https://platform.deepseek.com) |
-| **Groq** | llama-3.3-70b | Free tier! | [console.groq.com](https://console.groq.com) |
-| **Together AI** | Llama 3.3 70B | $0.90/M | [together.ai](https://together.ai) |
-| **Fireworks** | Llama 3.3 70B | $0.90/M | [fireworks.ai](https://fireworks.ai) |
-| **Perplexity** | Sonar Large | $1/M + search | [perplexity.ai](https://docs.perplexity.ai) |
-| **xAI (Grok)** | grok-2 | $2/M | [x.ai/api](https://x.ai/api) |
-| **OpenRouter** | 100+ models | From FREE | [openrouter.ai/keys](https://openrouter.ai/keys) |
-| **Qwen (Alibaba)** | qwen-plus, qwen-max | ~$0.4/M | [dashscope.aliyun.com](https://dashscope.console.aliyun.com) |
-| **Kimi (Moonshot)** | moonshot-v1-8k | ~$0.2/M | [platform.moonshot.cn](https://platform.moonshot.cn) |
-| **GLM (Zhipu AI)** | glm-4-flash | Free tier! | [open.bigmodel.cn](https://open.bigmodel.cn) |
+| Provider | Model | Cost | API Key? | How to Get a Key |
+|----------|-------|------|----------|-------------------|
+| **Ollama** | codellama, llama3, etc. | **FREE** | ❌ **No key needed** | [ollama.com](https://ollama.com) — just install it |
+| **Google Gemini** | gemini-2.5-flash | **FREE** tier | Free key | [aistudio.google.com](https://aistudio.google.com/apikey) |
+| **Groq** | llama-3.3-70b | **FREE** tier | Free key | [console.groq.com](https://console.groq.com) |
+| **GLM (Zhipu AI)** | glm-4-flash | **FREE** | Free key | [open.bigmodel.cn](https://open.bigmodel.cn) |
+| **OpenRouter** | 100+ models, many `:free` | From **FREE** | Free key | [openrouter.ai/keys](https://openrouter.ai/keys) |
+| **OpenAI** | gpt-4o, gpt-4o-mini | $$ | Paid key | [platform.openai.com](https://platform.openai.com) |
+| **Anthropic** | claude-sonnet-4 | $$ | Paid key | [console.anthropic.com](https://console.anthropic.com) |
+| **DeepSeek** | deepseek-chat | ~$0.14/M | Paid key | [platform.deepseek.com](https://platform.deepseek.com) |
+| **Together AI** | Llama 3.3 70B (+ free models) | $0.90/M | Key (has free models) | [together.ai](https://together.ai) |
+| **Fireworks** | Llama 3.3 70B | $0.90/M | Paid key | [fireworks.ai](https://fireworks.ai) |
+| **Perplexity** | Sonar Pro | $1/M + search | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
+| **xAI (Grok)** | grok-3 | $2/M | Paid key | [x.ai/api](https://x.ai/api) |
+| **Qwen (Alibaba)** | qwen-plus, qwen-max | ~$0.4/M | Paid key | [dashscope.aliyun.com](https://dashscope.console.aliyun.com) |
+| **Kimi (Moonshot)** | kimi-k2, moonshot-v1 | ~$0.2/M | Paid key | [platform.moonshot.cn](https://platform.moonshot.cn) |
+
+### 🆓 Use It Completely Free — No API Key
+
+The **Ollama** provider needs **no API key at all** — models run locally on your PC:
+
+1. Install [Ollama](https://ollama.com) (free)
+2. In a terminal: `ollama pull llama3.2` (or `codellama`, `qwen2.5-coder`, `deepseek-r1`…)
+3. In AutoAgent Settings, pick provider **ollama** — every model in the dropdown shows
+   **(Free — No API Key needed)** and the API key box disables itself
+4. Press ▶ Run. Zero cost, zero sign-up, works offline
+
+**Free cloud models** (need only a free account key, no payment): every model marked
+**(Free)** in the app's Settings dropdown — including `gemini-2.5-flash`, all Groq models,
+`glm-4-flash`, and every OpenRouter model ending in `:free`.
+The in-app model catalog covers all 14 providers and is kept updated with each release.
 
 ### Environment Variables
 

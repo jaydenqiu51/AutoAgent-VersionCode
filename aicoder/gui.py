@@ -80,6 +80,92 @@ PROVIDER_DEFAULTS = {
 }
 PROVIDER_LIST = list(PROVIDER_DEFAULTS.keys())
 
+# ── FULL MODEL CATALOG ── every model per provider, tagged:
+#   "free"     → 100% free, NO API key needed (runs locally)
+#   "freetier" → free to use, just needs a free account key
+#   None       → paid
+MODEL_CATALOG = {
+    "openai": [
+        ("gpt-4o", None), ("gpt-4o-mini", None), ("gpt-4.1", None),
+        ("gpt-4.1-mini", None), ("gpt-4.1-nano", None), ("o3", None), ("o4-mini", None),
+    ],
+    "anthropic": [
+        ("claude-sonnet-4-20250514", None), ("claude-opus-4-20250514", None),
+        ("claude-3-5-sonnet-20241022", None), ("claude-3-5-haiku-20241022", None),
+    ],
+    "gemini": [
+        ("gemini-2.5-flash", "freetier"), ("gemini-2.5-flash-lite", "freetier"),
+        ("gemini-2.0-flash", "freetier"), ("gemini-2.5-pro", None),
+    ],
+    "ollama": [
+        ("llama3.2", "free"), ("llama3.1", "free"), ("codellama", "free"),
+        ("qwen2.5-coder", "free"), ("deepseek-coder-v2", "free"), ("deepseek-r1", "free"),
+        ("mistral", "free"), ("phi4", "free"), ("gemma3", "free"), ("codegemma", "free"),
+    ],
+    "deepseek": [("deepseek-chat", None), ("deepseek-reasoner", None)],
+    "groq": [
+        ("llama-3.3-70b-versatile", "freetier"), ("llama-3.1-8b-instant", "freetier"),
+        ("qwen-2.5-coder-32b", "freetier"), ("deepseek-r1-distill-llama-70b", "freetier"),
+        ("gemma2-9b-it", "freetier"),
+    ],
+    "together": [
+        ("meta-llama/Llama-3.3-70B-Instruct-Turbo-Free", "freetier"),
+        ("deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free", "freetier"),
+        ("meta-llama/Llama-3.3-70B-Instruct-Turbo", None),
+        ("Qwen/Qwen2.5-Coder-32B-Instruct", None),
+        ("mistralai/Mixtral-8x7B-Instruct-v0.1", None),
+    ],
+    "fireworks": [
+        ("accounts/fireworks/models/llama-v3p3-70b-instruct", None),
+        ("accounts/fireworks/models/qwen2p5-coder-32b-instruct", None),
+        ("accounts/fireworks/models/deepseek-v3", None),
+    ],
+    "perplexity": [("sonar", None), ("sonar-pro", None), ("sonar-reasoning-pro", None)],
+    "xai": [("grok-2", None), ("grok-3", None), ("grok-3-mini", None)],
+    "openrouter": [
+        ("meta-llama/llama-3.3-70b-instruct:free", "freetier"),
+        ("deepseek/deepseek-chat-v3-0324:free", "freetier"),
+        ("deepseek/deepseek-r1:free", "freetier"),
+        ("google/gemma-3-27b-it:free", "freetier"),
+        ("qwen/qwen-2.5-coder-32b-instruct:free", "freetier"),
+        ("mistralai/mistral-small-3.1-24b-instruct:free", "freetier"),
+        ("openai/gpt-4o", None), ("anthropic/claude-sonnet-4", None),
+    ],
+    "qwen": [("qwen-plus", None), ("qwen-max", None), ("qwen-turbo", None), ("qwen3-coder-plus", None)],
+    "kimi": [("kimi-k2-0711-preview", None), ("moonshot-v1-8k", None),
+             ("moonshot-v1-32k", None), ("moonshot-v1-128k", None)],
+    "glm": [("glm-4-flash", "freetier"), ("glm-4.5", None), ("glm-4-air", None), ("glm-4-plus", None)],
+}
+
+FREE_SUFFIX = "  (Free — No API Key needed)"
+FREETIER_SUFFIX = "  (Free)"
+
+
+def model_display(model_id, tag):
+    """Display string for the model dropdown."""
+    if tag == "free":
+        return model_id + FREE_SUFFIX
+    if tag == "freetier":
+        return model_id + FREETIER_SUFFIX
+    return model_id
+
+
+def strip_model_suffix(name):
+    """Turn a display string back into the raw model id."""
+    for suf in (FREE_SUFFIX, FREETIER_SUFFIX):
+        if name.endswith(suf):
+            return name[: -len(suf)].strip()
+    return name.strip()
+
+
+def model_tag(provider, model_id):
+    """Return 'free' / 'freetier' / None for a provider+model pair."""
+    mid = strip_model_suffix(model_id)
+    for m, tag in MODEL_CATALOG.get(provider, []):
+        if m == mid:
+            return tag
+    return "free" if provider == "ollama" else None
+
 AGENTS = [
     ("Planner Agent",       "Strategic roadmap & audit",  PURPLE, ("audit", "plan", "roadmap", "analy", "scan")),
     ("Coding Agent",        "Implementing improvements",  BLUE,   ("implement", "improv", "code", "edit", "write", "apply", "patch")),
@@ -316,10 +402,18 @@ class AICoderApp:
         self._max_var = tk.StringVar(value=str(c.get("max_iterations", "100")))
         self._goal_var = tk.StringVar(value=c.get("goal", ""))
 
+    def _model_id(self):
+        """Raw model id with any '(Free …)' suffix stripped."""
+        return strip_model_suffix(self._model_var.get())
+
+    def _model_is_keyless(self):
+        """True when the chosen model runs without any API key."""
+        return model_tag(self._prov_var.get(), self._model_var.get()) == "free"
+
     def _save_config(self):
         try:
             self.CONFIG_FILE.write_text(json.dumps({
-                "provider": self._prov_var.get(), "model": self._model_var.get(),
+                "provider": self._prov_var.get(), "model": self._model_id(),
                 "api_key": self._api_key_var.get(), "workspace": self._work_var.get(),
                 "target": self._target_var.get(), "max_iterations": self._max_var.get(),
                 "goal": self._goal_var.get()}, indent=2))
@@ -586,7 +680,12 @@ class AICoderApp:
     def _refresh_badges(self):
         for w in self._badge_frame.winfo_children():
             w.destroy()
-        for text, color in ((self._model_var.get(), BLUE), (self._prov_var.get(), PURPLE)):
+        badges = [(self._model_id(), BLUE), (self._prov_var.get(), PURPLE)]
+        if self._model_is_keyless():
+            badges.append(("FREE — No API Key", GREEN))
+        elif model_tag(self._prov_var.get(), self._model_var.get()) == "freetier":
+            badges.append(("FREE", GREEN))
+        for text, color in badges:
             if not text:
                 continue
             c = tk.Frame(self._badge_frame, bg=CARD, highlightbackground=BORDER, highlightthickness=1)
@@ -1233,7 +1332,7 @@ class AICoderApp:
         win = tk.Toplevel(self.root)
         win.title("Settings")
         win.configure(bg=BG2)
-        win.geometry("540x520")
+        win.geometry("540x600")
         win.transient(self.root)
         win.grab_set()
 
@@ -1251,32 +1350,67 @@ class AICoderApp:
         prov_combo = ttk.Combobox(pf, textvariable=self._prov_var, values=PROVIDER_LIST,
                                    state="readonly", font=(UI_FONT, 10))
         prov_combo.pack(fill=tk.X, padx=8, pady=8)
-        def _on_prov(*a):
-            d = PROVIDER_DEFAULTS.get(self._prov_var.get(), {})
-            self._model_var.set(d.get("model", ""))
-        prov_combo.bind("<<ComboboxSelected>>", _on_prov)
 
-        # Model
-        tk.Label(body, text="MODEL ID", bg=BG2, fg=FG_FAINT,
+        # Model — dropdown listing every model; free ones are labelled
+        tk.Label(body, text="MODEL", bg=BG2, fg=FG_FAINT,
                  font=(UI_FONT, 7, "bold")).pack(anchor=tk.W, pady=(0, 5))
         mf = tk.Frame(body, bg=CARD, highlightbackground=BORDER2, highlightthickness=1)
-        mf.pack(fill=tk.X, pady=(0, 12))
-        tk.Entry(mf, textvariable=self._model_var, bg=CARD, fg=FG,
-                 insertbackground=FG, relief=tk.FLAT, bd=0,
-                 font=(MONO_FONT, 10)).pack(fill=tk.X, padx=8, pady=8)
+        mf.pack(fill=tk.X, pady=(0, 4))
+        model_combo = ttk.Combobox(mf, textvariable=self._model_var,
+                                    font=(MONO_FONT, 9))
+        model_combo.pack(fill=tk.X, padx=8, pady=8)
+        free_lbl = tk.Label(body, text="", bg=BG2, fg=GREEN, font=(UI_FONT, 8, "bold"))
+        free_lbl.pack(anchor=tk.W, pady=(0, 8))
 
         # API Key
         tk.Label(body, text="API KEY", bg=BG2, fg=FG_FAINT,
                  font=(UI_FONT, 7, "bold")).pack(anchor=tk.W, pady=(0, 5))
         kf = tk.Frame(body, bg=CARD, highlightbackground=BORDER2, highlightthickness=1)
         kf.pack(fill=tk.X, pady=(0, 12))
-        tk.Entry(kf, textvariable=self._api_key_var, show="●", bg=CARD, fg=FG,
-                 insertbackground=FG, relief=tk.FLAT, bd=0,
-                 font=(MONO_FONT, 10)).pack(fill=tk.X, padx=8, pady=8)
-        hint = PROVIDER_DEFAULTS.get(self._prov_var.get(), {}).get("hint", "")
-        if hint:
-            tk.Label(body, text=f"Hint: {hint}", bg=BG2, fg=FG_FAINT,
-                     font=(UI_FONT, 8)).pack(anchor=tk.W, pady=(0, 12))
+        key_entry = tk.Entry(kf, textvariable=self._api_key_var, show="●", bg=CARD, fg=FG,
+                             insertbackground=FG, relief=tk.FLAT, bd=0,
+                             font=(MONO_FONT, 10))
+        key_entry.pack(fill=tk.X, padx=8, pady=8)
+        hint_lbl = tk.Label(body, text="", bg=BG2, fg=FG_FAINT, font=(UI_FONT, 8))
+        hint_lbl.pack(anchor=tk.W, pady=(0, 12))
+
+        def _fill_models():
+            prov = self._prov_var.get()
+            model_combo["values"] = [model_display(m, t)
+                                     for m, t in MODEL_CATALOG.get(prov, [])]
+
+        def _refresh_free_state(*a):
+            prov = self._prov_var.get()
+            tag = model_tag(prov, self._model_var.get())
+            if tag == "free":
+                free_lbl.config(text="✓ Free — No API Key needed", fg=GREEN)
+                key_entry.config(state=tk.DISABLED, disabledbackground=CARD)
+                hint_lbl.config(text="This model runs locally via Ollama — no key, no cost.")
+            elif tag == "freetier":
+                free_lbl.config(text="✓ Free model — works with a free API key", fg=TEAL)
+                key_entry.config(state=tk.NORMAL)
+                hint_lbl.config(text="Hint: " + PROVIDER_DEFAULTS.get(prov, {}).get("hint", "")
+                                + "  (key is free to create)")
+            else:
+                free_lbl.config(text="")
+                key_entry.config(state=tk.NORMAL)
+                h = PROVIDER_DEFAULTS.get(prov, {}).get("hint", "")
+                hint_lbl.config(text=f"Hint: {h}" if h else "")
+
+        def _on_prov(*a):
+            prov = self._prov_var.get()
+            d = PROVIDER_DEFAULTS.get(prov, {})
+            cat = MODEL_CATALOG.get(prov, [])
+            default = d.get("model", "")
+            tag = next((t for m, t in cat if m == default), None)
+            self._model_var.set(model_display(default, tag))
+            _fill_models()
+            _refresh_free_state()
+        prov_combo.bind("<<ComboboxSelected>>", _on_prov)
+        model_combo.bind("<<ComboboxSelected>>", _refresh_free_state)
+        model_combo.bind("<KeyRelease>", _refresh_free_state)
+        _fill_models()
+        _refresh_free_state()
 
         # Workspace
         tk.Label(body, text="WORKSPACE", bg=BG2, fg=FG_FAINT,
@@ -1322,7 +1456,7 @@ class AICoderApp:
     def _test_connection(self, win=None):
         prov = self._prov_var.get()
         key = self._api_key_var.get().strip()
-        if not key and prov != "ollama":
+        if not key and prov != "ollama" and not self._model_is_keyless():
             self._toasts.show("No API key set", "warn")
             return
         self._toasts.show(f"Testing {prov}…", "info", 2000)
@@ -1356,13 +1490,13 @@ class AICoderApp:
                 elif prov == "anthropic":
                     from anthropic import Anthropic
                     ac = Anthropic(api_key=key)
-                    ac.messages.create(model=self._model_var.get(), max_tokens=5,
+                    ac.messages.create(model=self._model_id(), max_tokens=5,
                                        messages=[{"role": "user", "content": "hi"}])
                     self._update_queue.put(("toast", "Connection OK ✓", "success"))
                     return
                 else:
                     c = OpenAI(api_key=key)
-                c.chat.completions.create(model=self._model_var.get(), max_tokens=5,
+                c.chat.completions.create(model=self._model_id(), max_tokens=5,
                                           messages=[{"role": "user", "content": "hi"}])
                 self._update_queue.put(("toast", "Connection OK ✓", "success"))
             except Exception as e:
@@ -1381,7 +1515,7 @@ class AICoderApp:
             return
         key = self._api_key_var.get().strip()
         prov = self._prov_var.get()
-        if not key and prov != "ollama":
+        if not key and prov != "ollama" and not self._model_is_keyless():
             self._toasts.show("No API key configured", "warn")
             return
         self._save_config()
@@ -1407,7 +1541,7 @@ class AICoderApp:
             from openai import OpenAI
             prov = self._prov_var.get()
             key = self._api_key_var.get().strip()
-            model = self._model_var.get()
+            model = self._model_id()
             if prov == "ollama":
                 client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
             elif prov == "deepseek":

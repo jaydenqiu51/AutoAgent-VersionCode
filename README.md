@@ -128,8 +128,9 @@ Output goes to `dist/AICoder.exe` — a single file you can share or put on a US
 
 ## Supported LLM Providers
 
-Prices are **per 1 million tokens** (input / output), current as of July 2026.
+Prices are **per 1 million tokens** (input / output).
 
+<!-- PRICING:START -->
 | Provider | Model | Price per 1M tokens (in / out) | API Key? | How to Get a Key |
 |----------|-------|-------------------------------|----------|-------------------|
 | **Ollama** | codellama, llama3, etc. | **$0 — completely FREE** | ❌ **No key needed** | [ollama.com](https://ollama.com) — just install it |
@@ -150,6 +151,9 @@ Prices are **per 1 million tokens** (input / output), current as of July 2026.
 | | claude-3-5-haiku | $0.80 / $4.00 | | |
 | **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
+
+_Last updated: 2026-07-24 · prices auto-refresh every 2 hours_
+<!-- PRICING:END -->
 
 ### 🆓 Use It Completely Free — No API Key
 

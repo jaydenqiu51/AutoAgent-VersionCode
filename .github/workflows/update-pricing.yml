@@ -1,0 +1,35 @@
+name: Update live pricing
+
+on:
+  schedule:
+    # Every 2 hours
+    - cron: "0 */2 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update-pricing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Refresh README pricing table
+        run: python scripts/update_pricing.py
+
+      - name: Commit & push if prices changed
+        run: |
+          if git diff --quiet README.md; then
+            echo "Prices unchanged, nothing to commit"
+          else
+            git config user.name "pricing-bot"
+            git config user.email "actions@github.com"
+            git add README.md
+            git commit -m "chore: refresh live pricing table [skip ci]"
+            git push
+          fi

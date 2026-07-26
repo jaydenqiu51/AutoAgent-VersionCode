@@ -51,6 +51,7 @@ This creates a self-improving development loop.
 - **Quality Metrics** — Tracks quality over time with category-level scoring, trend analysis, and target thresholds
 - **Test Validator** — Verifies improvements don't break the project (custom test functions, file checks, command checks)
 - **14 Pluggable LLM Providers** — OpenAI, Anthropic, Gemini, Ollama, DeepSeek, Groq, Together, Fireworks, Perplexity, xAI, OpenRouter, Qwen, Kimi, GLM
+- **Built-in Model Catalog** — 60+ models in a Settings dropdown; free models are labelled **(Free — No API Key needed)** / **(Free)** and the key field disables itself for keyless models
 - **Extensible Tools** — File I/O, shell execution, regex/grep search, glob file matching, git operations
 - **Safety First** — Shell sandboxing blocks dangerous commands; file writes restricted to workspace
 - **pip-Installable** — Single command install with `aicoder` CLI entry point
@@ -64,7 +65,7 @@ This creates a self-improving development loop.
 3. Double-click **`run.bat`**
    - First run: dependencies install automatically (takes ~1 minute)
    - Every run after: the app opens instantly, no console window
-4. Click ⚙ Settings, pick a provider, paste your API key, set a goal, press **▶ Run**
+4. Click ⚙ Settings, pick a provider and a model from the dropdown (free ones are labelled), paste your API key if needed, set a goal, press **▶ Run**
 
 > **"Publisher cannot be verified"?** That's standard Windows behavior for files
 > downloaded from the internet — click **Run**. You only need Python installed
@@ -127,22 +128,28 @@ Output goes to `dist/AICoder.exe` — a single file you can share or put on a US
 
 ## Supported LLM Providers
 
-| Provider | Model | Cost | API Key? | How to Get a Key |
-|----------|-------|------|----------|-------------------|
-| **Ollama** | codellama, llama3, etc. | **FREE** | ❌ **No key needed** | [ollama.com](https://ollama.com) — just install it |
-| **Google Gemini** | gemini-2.5-flash | **FREE** tier | Free key | [aistudio.google.com](https://aistudio.google.com/apikey) |
-| **Groq** | llama-3.3-70b | **FREE** tier | Free key | [console.groq.com](https://console.groq.com) |
+Prices are **per 1 million tokens** (input / output), current as of July 2026.
+
+| Provider | Model | Price per 1M tokens (in / out) | API Key? | How to Get a Key |
+|----------|-------|-------------------------------|----------|-------------------|
+| **Ollama** | codellama, llama3, etc. | **$0 — completely FREE** | ❌ **No key needed** | [ollama.com](https://ollama.com) — just install it |
+| **Google Gemini** | gemini-2.5-flash | **FREE tier** (paid: $0.30 / $2.50) | Free key | [aistudio.google.com](https://aistudio.google.com/apikey) |
+| **Groq** | llama-3.3-70b-versatile | **FREE tier** (paid: $0.59 / $0.79) | Free key | [console.groq.com](https://console.groq.com) |
 | **GLM (Zhipu AI)** | glm-4-flash | **FREE** | Free key | [open.bigmodel.cn](https://open.bigmodel.cn) |
-| **OpenRouter** | 100+ models, many `:free` | From **FREE** | Free key | [openrouter.ai/keys](https://openrouter.ai/keys) |
-| **OpenAI** | gpt-4o, gpt-4o-mini | $$ | Paid key | [platform.openai.com](https://platform.openai.com) |
-| **Anthropic** | claude-sonnet-4 | $$ | Paid key | [console.anthropic.com](https://console.anthropic.com) |
-| **DeepSeek** | deepseek-chat | ~$0.14/M | Paid key | [platform.deepseek.com](https://platform.deepseek.com) |
-| **Together AI** | Llama 3.3 70B (+ free models) | $0.90/M | Key (has free models) | [together.ai](https://together.ai) |
-| **Fireworks** | Llama 3.3 70B | $0.90/M | Paid key | [fireworks.ai](https://fireworks.ai) |
-| **Perplexity** | Sonar Pro | $1/M + search | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
-| **xAI (Grok)** | grok-3 | $2/M | Paid key | [x.ai/api](https://x.ai/api) |
-| **Qwen (Alibaba)** | qwen-plus, qwen-max | ~$0.4/M | Paid key | [dashscope.aliyun.com](https://dashscope.console.aliyun.com) |
-| **Kimi (Moonshot)** | kimi-k2, moonshot-v1 | ~$0.2/M | Paid key | [platform.moonshot.cn](https://platform.moonshot.cn) |
+| **OpenRouter** | 100+ models, many `:free` | **FREE** (`:free` models) and up | Free key | [openrouter.ai/keys](https://openrouter.ai/keys) |
+| **DeepSeek** | deepseek-chat | $0.27 / $1.10 | Paid key | [platform.deepseek.com](https://platform.deepseek.com) |
+| **Qwen (Alibaba)** | qwen-plus | $0.40 / $1.20 | Paid key | [dashscope.aliyun.com](https://dashscope.console.aliyun.com) |
+| **Kimi (Moonshot)** | kimi-k2 | $0.60 / $2.50 | Paid key | [platform.moonshot.cn](https://platform.moonshot.cn) |
+| **Together AI** | Llama 3.3 70B Turbo | $0.88 / $0.88 (+ free models) | Key (has free models) | [together.ai](https://together.ai) |
+| **Fireworks** | Llama 3.3 70B | $0.90 / $0.90 | Paid key | [fireworks.ai](https://fireworks.ai) |
+| **OpenAI** | gpt-4o | $2.50 / $10.00 | Paid key | [platform.openai.com](https://platform.openai.com) |
+| | gpt-4o-mini | $0.15 / $0.60 | | |
+| | gpt-4.1 | $2.00 / $8.00 | | |
+| **Anthropic** | claude-sonnet-4 | $3.00 / $15.00 | Paid key | [console.anthropic.com](https://console.anthropic.com) |
+| | claude-opus-4 | $15.00 / $75.00 | | |
+| | claude-3-5-haiku | $0.80 / $4.00 | | |
+| **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
+| **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
 
 ### 🆓 Use It Completely Free — No API Key
 

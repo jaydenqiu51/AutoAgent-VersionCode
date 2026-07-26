@@ -1,4 +1,4 @@
-"""Launch the AI Coding Agent Framework GUI (no console window).
+"""Launch the AutoAgent GUI (no console window).
 
 Double-click this file on Windows to start the app without any terminal.
 If anything goes wrong, an error dialog is shown instead of failing silently.
@@ -23,7 +23,7 @@ except Exception:
         root.withdraw()
         if "ModuleNotFoundError" in err or "ImportError" in err:
             messagebox.showerror(
-                "AICoder — Missing Dependencies",
+                "AutoAgent — Missing Dependencies",
                 "Some required packages are not installed.\n\n"
                 "Fix: double-click run.bat instead — it installs\n"
                 "everything automatically on first run.\n\n"
@@ -31,7 +31,7 @@ except Exception:
                 "    pip install -r requirements.txt\n\n"
                 f"Details:\n{err.splitlines()[-1]}")
         else:
-            messagebox.showerror("AICoder — Startup Error", err[-1500:])
+            messagebox.showerror("AutoAgent — Startup Error", err[-1500:])
     except Exception:
         pass
     raise

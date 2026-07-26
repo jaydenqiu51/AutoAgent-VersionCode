@@ -1,4 +1,4 @@
-"""Desktop GUI for the AI Coding Agent Framework.
+"""Desktop GUI for AutoAgent — the self-improving AI coding agent.
 
 Ultra-premium dark dashboard with neon accents, glass-morphism cards,
 glow gauges, toast notifications, tooltips, and smooth hover animations.
@@ -207,7 +207,7 @@ class AICoderApp:
 
     def __init__(self, root: tk.Tk):
         self.root = root
-        self.root.title("AICODER")
+        self.root.title("AutoAgent")
         self.root.geometry("1380x880")
         self.root.minsize(1100, 720)
         self.root.configure(bg=BG)
@@ -418,9 +418,9 @@ class AICoderApp:
             cv.create_oval(cx-3, cy-3, cx+3, cy+3, fill=CYAN, outline="")
         lbl_f = tk.Frame(logo_f, bg=SIDEBAR)
         lbl_f.pack(side=tk.LEFT, padx=(12, 0))
-        tk.Label(lbl_f, text="AICODER", bg=SIDEBAR, fg=FG,
+        tk.Label(lbl_f, text="AutoAgent", bg=SIDEBAR, fg=FG,
                  font=(TITLE_FONT, 14, "bold")).pack(anchor=tk.W)
-        tk.Label(lbl_f, text="Coding Agent Framework", bg=SIDEBAR, fg=FG_FAINT,
+        tk.Label(lbl_f, text="Self-Improving AI Coder", bg=SIDEBAR, fg=FG_FAINT,
                  font=(UI_FONT, 7)).pack(anchor=tk.W)
 
         # Separator

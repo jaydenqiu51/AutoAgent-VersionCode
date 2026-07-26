@@ -1,5 +1,5 @@
 @echo off
-title AI Coding Agent Framework
+title AutoAgent
 :: Always run from this script's folder (fixes double-click from ZIP/downloads)
 cd /d "%~dp0"
 

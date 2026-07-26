@@ -1,15 +1,15 @@
 <div align="center">
 
-<img src="aicoder/logo.png" alt="AICoder logo" width="140"/>
+<img src="aicoder/logo.png" alt="AutoAgent logo" width="140"/>
 
-# AI Coding Agent Framework
+# AutoAgent
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![Status: Alpha](https://img.shields.io/badge/status-alpha-orange.svg)]()
 [![Providers: 14](https://img.shields.io/badge/LLM_providers-14-8A2BE2.svg)]()
 
-**A self-improving AI coding agent with a premium desktop dashboard.**
+**AutoAgent — a self-improving AI coding agent with a premium desktop dashboard.**
 Give it a goal — it audits your project, builds a roadmap, then autonomously
 implements, tests, and measures improvements in a continuous loop.
 

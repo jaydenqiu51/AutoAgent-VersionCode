@@ -51,7 +51,7 @@ This creates a self-improving development loop.
 - **Quality Metrics** — Tracks quality over time with category-level scoring, trend analysis, and target thresholds
 - **Test Validator** — Verifies improvements don't break the project (custom test functions, file checks, command checks)
 - **14 Pluggable LLM Providers** — OpenAI, Anthropic, Gemini, Ollama, DeepSeek, Groq, Together, Fireworks, Perplexity, xAI, OpenRouter, Qwen, Kimi, GLM
-- **Built-in Model Catalog** — 60+ models in a Settings dropdown; free models are labelled **(Free — No API Key needed)** / **(Free)** and the key field disables itself for keyless models
+- **Built-in Model Catalog** — **100+ models** in a Settings dropdown; free models are labelled **(Free — No API Key needed)** / **(Free)** and the key field disables itself for keyless models
 - **Extensible Tools** — File I/O, shell execution, regex/grep search, glob file matching, git operations
 - **Safety First** — Shell sandboxing blocks dangerous commands; file writes restricted to workspace
 - **pip-Installable** — Single command install with `aicoder` CLI entry point
@@ -154,6 +154,15 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 
 _All prices in USD ($) · Last updated: 2026-07-24 · auto-refreshes every 2 hours_
 <!-- PRICING:END -->
+
+<!-- MODELS:START -->
+<details>
+<summary><b>📋 Full Model Catalog</b> — every model built into the app, with live USD prices (click to expand)</summary>
+
+_This table is populated automatically by the live pricing tracker (refreshes every 2 hours). If it looks empty, check back shortly — 100+ models across all 14 providers are listed here with their current USD prices._
+
+</details>
+<!-- MODELS:END -->
 
 ### 🆓 Use It Completely Free — No API Key
 

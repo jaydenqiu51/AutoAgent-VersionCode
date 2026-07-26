@@ -138,28 +138,107 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **Groq** | llama-3.3-70b-versatile | **FREE tier** (paid: $0.59 / $0.79) | Free key | [console.groq.com](https://console.groq.com) |
 | **GLM (Zhipu AI)** | glm-4-flash | **FREE** | Free key | [open.bigmodel.cn](https://open.bigmodel.cn) |
 | **OpenRouter** | 100+ models, many `:free` | **FREE** (`:free` models) and up | Free key | [openrouter.ai/keys](https://openrouter.ai/keys) |
-| **DeepSeek** | deepseek-chat | $0.27 / $1.10 | Paid key | [platform.deepseek.com](https://platform.deepseek.com) |
-| **Qwen (Alibaba)** | qwen-plus | $0.40 / $1.20 | Paid key | [dashscope.aliyun.com](https://dashscope.console.aliyun.com) |
-| **Kimi (Moonshot)** | kimi-k2 | $0.60 / $2.50 | Paid key | [platform.moonshot.cn](https://platform.moonshot.cn) |
+| **DeepSeek** | deepseek-chat | $0.27 / $1.12 | Paid key | [platform.deepseek.com](https://platform.deepseek.com) |
+| **Qwen (Alibaba)** | qwen-plus | $0.26 / $0.78 | Paid key | [dashscope.aliyun.com](https://dashscope.console.aliyun.com) |
+| **Kimi (Moonshot)** | kimi-k2 | $0.57 / $2.30 | Paid key | [platform.moonshot.cn](https://platform.moonshot.cn) |
 | **Together AI** | Llama 3.3 70B Turbo | $0.88 / $0.88 (+ free models) | Key (has free models) | [together.ai](https://together.ai) |
 | **Fireworks** | Llama 3.3 70B | $0.90 / $0.90 | Paid key | [fireworks.ai](https://fireworks.ai) |
 | **OpenAI** | gpt-4o | $2.50 / $10.00 | Paid key | [platform.openai.com](https://platform.openai.com) |
-| | gpt-4o-mini | $0.15 / $0.60 | | |
-| | gpt-4.1 | $2.00 / $8.00 | | |
+|  | gpt-4o-mini | $0.15 / $0.60 |  |  |
+|  | gpt-4.1 | $2.00 / $8.00 |  |  |
 | **Anthropic** | claude-sonnet-4 | $3.00 / $15.00 | Paid key | [console.anthropic.com](https://console.anthropic.com) |
-| | claude-opus-4 | $15.00 / $75.00 | | |
-| | claude-3-5-haiku | $0.80 / $4.00 | | |
+|  | claude-opus-4 | $15.00 / $75.00 |  |  |
+|  | claude-3-5-haiku | $0.80 / $4.00 |  |  |
 | **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
 
-_All prices in USD ($) · Last updated: 2026-07-24 · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-07-26 10:22 UTC · auto-refreshes every 2 hours_
 <!-- PRICING:END -->
 
 <!-- MODELS:START -->
 <details>
 <summary><b>📋 Full Model Catalog</b> — every model built into the app, with live USD prices (click to expand)</summary>
 
-_This table is populated automatically by the live pricing tracker (refreshes every 2 hours). If it looks empty, check back shortly — 100+ models across all 14 providers are listed here with their current USD prices._
+| Provider | Model(s) | Price per 1M tokens, USD (in / out) |
+|----------|----------|--------------------------------------|
+| OpenAI | `gpt-4o` | $2.50 / $10.00 |
+| OpenAI | `gpt-4o-mini` | $0.15 / $0.60 |
+| OpenAI | `gpt-4.1` | $2.00 / $8.00 |
+| OpenAI | `gpt-4.1-mini` | $0.40 / $1.60 |
+| OpenAI | `gpt-4.1-nano` | $0.10 / $0.40 |
+| OpenAI | `o3` | $2.00 / $8.00 |
+| OpenAI | `o3-mini` | $1.10 / $4.40 |
+| OpenAI | `o4-mini` | $1.10 / $4.40 |
+| OpenAI | `gpt-4-turbo` | $10.00 / $30.00 |
+| OpenAI | `gpt-3.5-turbo` | $0.50 / $1.50 |
+| Anthropic | `claude-sonnet-4` | $3.00 / $15.00 |
+| Anthropic | `claude-opus-4` | $15.00 / $75.00 |
+| Anthropic | `claude-3-7-sonnet` | see provider site |
+| Anthropic | `claude-3-5-sonnet` | see provider site |
+| Anthropic | `claude-3-5-haiku` | see provider site |
+| Anthropic | `claude-3-haiku` | $0.25 / $1.25 |
+| Google Gemini | `gemini-2.5-flash` | **FREE tier** (paid: $0.30 / $2.50) |
+| Google Gemini | `gemini-2.5-flash-lite` | **FREE tier** (paid: $0.10 / $0.40) |
+| Google Gemini | `gemini-2.0-flash` | **FREE** (with free key) |
+| Google Gemini | `gemini-2.0-flash-lite` | **FREE** (with free key) |
+| Google Gemini | `gemini-1.5-flash` | **FREE** (with free key) |
+| Google Gemini | `gemini-2.5-pro` | $1.25 / $10.00 |
+| Google Gemini | `gemini-1.5-pro` | see provider site |
+| Ollama (local) | `llama3.3 / llama3.2 / llama3.1 / llama3.2-vision` | **FREE — No API Key needed** |
+| Ollama (local) | `codellama / qwen2.5-coder / qwen3` | **FREE — No API Key needed** |
+| Ollama (local) | `deepseek-coder-v2 / deepseek-r1` | **FREE — No API Key needed** |
+| Ollama (local) | `mistral / mistral-nemo / mixtral / codestral` | **FREE — No API Key needed** |
+| Ollama (local) | `phi4 / phi4-mini / gemma3 / gemma2 / codegemma` | **FREE — No API Key needed** |
+| Ollama (local) | `starcoder2 / granite3.3` | **FREE — No API Key needed** |
+| DeepSeek | `deepseek-chat` | $0.27 / $1.12 |
+| DeepSeek | `deepseek-reasoner` | $0.70 / $2.50 |
+| Groq | `llama-3.3-70b-versatile` | **FREE** (with free key) |
+| Groq | `llama-3.1-8b-instant` | **FREE** (with free key) |
+| Groq | `deepseek-r1-distill-llama-70b` | **FREE** (with free key) |
+| Groq | `qwen-2.5-coder-32b / qwen-qwq-32b` | **FREE** (with free key) |
+| Groq | `gemma2-9b-it / mixtral-8x7b-32768` | **FREE** (with free key) |
+| Groq | `llama-4-scout / llama-4-maverick` | **FREE** (with free key) |
+| Together AI | `Llama-3.3-70B-Instruct-Turbo-Free` | **FREE** (with free key) |
+| Together AI | `DeepSeek-R1-Distill-Llama-70B-free` | **FREE** (with free key) |
+| Together AI | `Llama-3.3-70B-Instruct-Turbo` | $0.13 / $0.40 |
+| Together AI | `Llama-4-Maverick-17B-128E` | $0.20 / $0.80 |
+| Together AI | `Qwen2.5-Coder-32B / Qwen3-235B` | see provider site |
+| Together AI | `DeepSeek-V3 / DeepSeek-R1` | see provider site |
+| Together AI | `Mixtral-8x7B-Instruct` | see provider site |
+| Fireworks | `llama-v3p3-70b / llama4-maverick` | see provider site |
+| Fireworks | `qwen2p5-coder-32b / deepseek-v3 / deepseek-r1` | see provider site |
+| Fireworks | `mixtral-8x22b-instruct` | see provider site |
+| Perplexity | `sonar` | $1.00 / $1.00 |
+| Perplexity | `sonar-pro` | $3.00 / $15.00 |
+| Perplexity | `sonar-reasoning` | see provider site |
+| Perplexity | `sonar-reasoning-pro` | $2.00 / $8.00 |
+| Perplexity | `sonar-deep-research` | $2.00 / $8.00 |
+| xAI (Grok) | `grok-4` | see provider site |
+| xAI (Grok) | `grok-3` | see provider site |
+| xAI (Grok) | `grok-3-mini` | see provider site |
+| xAI (Grok) | `grok-3-fast / grok-2` | see provider site |
+| OpenRouter | `llama-3.3-70b-instruct:free` | **FREE** (with free key) |
+| OpenRouter | `deepseek-chat-v3-0324:free` | **FREE** (with free key) |
+| OpenRouter | `deepseek-r1:free / deepseek-r1-0528:free` | **FREE** (with free key) |
+| OpenRouter | `gemma-3-27b-it:free` | **FREE** (with free key) |
+| OpenRouter | `qwen-2.5-coder-32b:free / qwen3-235b:free` | **FREE** (with free key) |
+| OpenRouter | `mistral-small-3.1-24b:free` | **FREE** (with free key) |
+| OpenRouter | `kimi-k2:free` | **FREE** (with free key) |
+| OpenRouter | `glm-4.5-air:free` | **FREE** (with free key) |
+| OpenRouter | `gpt-4o / claude-sonnet-4 / gemini-2.5-pro / grok-4` | see provider site |
+| Qwen (Alibaba) | `qwen-max` | see provider site |
+| Qwen (Alibaba) | `qwen-plus` | $0.26 / $0.78 |
+| Qwen (Alibaba) | `qwen-turbo` | see provider site |
+| Qwen (Alibaba) | `qwen3-coder-plus / qwen3-coder-flash` | $0.30 / $1.00 |
+| Qwen (Alibaba) | `qwen-long` | see provider site |
+| Kimi (Moonshot) | `kimi-k2 / kimi-k2-turbo / kimi-latest` | $0.57 / $2.30 |
+| Kimi (Moonshot) | `moonshot-v1-8k / 32k / 128k` | see provider site |
+| GLM (Zhipu AI) | `glm-4-flash / glm-4.5-flash` | **FREE** (with free key) |
+| GLM (Zhipu AI) | `glm-4.5` | $0.60 / $2.20 |
+| GLM (Zhipu AI) | `glm-4.5-air` | $0.13 / $0.85 |
+| GLM (Zhipu AI) | `glm-4.5-x / glm-4-plus / glm-4-air / glm-4-long` | see provider site |
+
+_All prices in USD ($) · Last updated: 2026-07-26 10:22 UTC · auto-refreshes every 2 hours_
 
 </details>
 <!-- MODELS:END -->

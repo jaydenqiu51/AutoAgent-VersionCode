@@ -73,7 +73,7 @@ This creates a self-improving development loop.
 
 ### Option B: Standalone .exe (no Python needed)
 
-1. Go to [Releases](https://github.com/jaydenqiu51/Ai-Coding-Agent-Framework/releases)
+1. Go to [Releases](https://github.com/jaydenqiu51/AutoAgent-VersionCode/releases)
 2. Download **AICoder.exe**
 3. Double-click it — the desktop app opens immediately, no install needed
 4. Enter your API key, set a goal, and click **Start Engine**
@@ -81,8 +81,8 @@ This creates a self-improving development loop.
 ### Option C: Launch Desktop App from Source
 
 ```bash
-git clone https://github.com/jaydenqiu51/Ai-Coding-Agent-Framework.git
-cd Ai-Coding-Agent-Framework
+git clone https://github.com/jaydenqiu51/AutoAgent-VersionCode.git
+cd AutoAgent-VersionCode
 pip install -e .
 aicoder --gui
 ```
@@ -91,8 +91,8 @@ aicoder --gui
 
 ```bash
 # 1. Install
-git clone https://github.com/jaydenqiu51/Ai-Coding-Agent-Framework.git
-cd Ai-Coding-Agent-Framework
+git clone https://github.com/jaydenqiu51/AutoAgent-VersionCode.git
+cd AutoAgent-VersionCode
 pip install -e .
 
 # 2. Configure (Windows PowerShell)
@@ -315,7 +315,7 @@ print(report)
 ## Project Structure
 
 ```
-Ai-Coding-Agent-Framework/
+AutoAgent-VersionCode/
 ├── README.md
 ├── LICENSE
 ├── setup.py

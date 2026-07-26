@@ -94,8 +94,8 @@ def fetch_prices():
 
 def build_table(prices):
     lines = [
-        "| Provider | Model | Price per 1M tokens (in / out) | API Key? | How to Get a Key |",
-        "|----------|-------|-------------------------------|----------|-------------------|",
+        "| Provider | Model | Price per 1M tokens, USD (in / out) | API Key? | How to Get a Key |",
+        "|----------|-------|-------------------------------------|----------|-------------------|",
     ]
     for prov, model, spec, key, link in ROWS:
         kind = spec[0]
@@ -108,7 +108,7 @@ def build_table(prices):
             price = spec[3].format(live) if live else spec[2]
         lines.append(f"| {prov} | {model} | {price} | {key} | {link} |")
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-    lines += ["", f"_Last updated: {stamp} · prices auto-refresh every 2 hours_"]
+    lines += ["", f"_All prices in USD ($) · Last updated: {stamp} · auto-refreshes every 2 hours_"]
     return "\n".join(lines)
 
 

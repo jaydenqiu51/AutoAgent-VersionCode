@@ -128,11 +128,11 @@ Output goes to `dist/AICoder.exe` — a single file you can share or put on a US
 
 ## Supported LLM Providers
 
-Prices are **per 1 million tokens** (input / output).
+Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 
 <!-- PRICING:START -->
-| Provider | Model | Price per 1M tokens (in / out) | API Key? | How to Get a Key |
-|----------|-------|-------------------------------|----------|-------------------|
+| Provider | Model | Price per 1M tokens, USD (in / out) | API Key? | How to Get a Key |
+|----------|-------|-------------------------------------|----------|-------------------|
 | **Ollama** | codellama, llama3, etc. | **$0 — completely FREE** | ❌ **No key needed** | [ollama.com](https://ollama.com) — just install it |
 | **Google Gemini** | gemini-2.5-flash | **FREE tier** (paid: $0.30 / $2.50) | Free key | [aistudio.google.com](https://aistudio.google.com/apikey) |
 | **Groq** | llama-3.3-70b-versatile | **FREE tier** (paid: $0.59 / $0.79) | Free key | [console.groq.com](https://console.groq.com) |
@@ -152,7 +152,7 @@ Prices are **per 1 million tokens** (input / output).
 | **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
 
-_Last updated: 2026-07-24 · prices auto-refresh every 2 hours_
+_All prices in USD ($) · Last updated: 2026-07-24 · auto-refreshes every 2 hours_
 <!-- PRICING:END -->
 
 ### 🆓 Use It Completely Free — No API Key

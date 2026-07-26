@@ -337,19 +337,53 @@ class AICoderApp:
 
     @staticmethod
     def _set_taskbar_icon(root):
-        """Set the taskbar/titlebar icon from logo.png."""
+        """Set the taskbar/titlebar icon from logo.png.
+
+        Windows shows the host process (pythonw) icon unless we both
+        declare our own AppUserModelID and hand the window a real .ico.
+        """
         import math
+        # 1) Detach from pythonw's taskbar identity → our own app identity
+        if os.name == "nt":
+            try:
+                import ctypes
+                ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(
+                    "AutoAgent.Desktop.App")
+            except Exception:
+                pass
         logo_path = Path(__file__).resolve().parent / "logo.png"
         if logo_path.exists():
             try:
                 img = tk.PhotoImage(file=str(logo_path))
-                # Subsample to ~32px for icon
+                # Subsample to ~32px for the titlebar photo icon
                 w = img.width()
                 factor = max(1, w // 32)
                 icon = img.subsample(factor, factor)
                 root._icon_img = icon
                 root._icon_src = img  # keep reference
                 root.iconphoto(True, icon)
+                # 2) Real .ico for the Windows taskbar (PNG-in-ICO container)
+                if os.name == "nt":
+                    try:
+                        ico_path = Path.home() / ".autoagent_icon.ico"
+                        stale = (not ico_path.exists() or
+                                 ico_path.stat().st_mtime < logo_path.stat().st_mtime)
+                        if stale:
+                            big_factor = max(1, (w + 255) // 256)
+                            big = img.subsample(big_factor, big_factor)
+                            tmp_png = Path.home() / ".autoagent_icon.png"
+                            big.write(str(tmp_png), format="png")
+                            png = tmp_png.read_bytes()
+                            import struct
+                            bw, bh = big.width(), big.height()
+                            header = struct.pack("<HHH", 0, 1, 1)
+                            entry = struct.pack("<BBBBHHII", bw % 256, bh % 256,
+                                                0, 0, 1, 32, len(png), 22)
+                            ico_path.write_bytes(header + entry + png)
+                            tmp_png.unlink(missing_ok=True)
+                        root.iconbitmap(default=str(ico_path))
+                    except Exception:
+                        pass
                 return
             except Exception:
                 pass

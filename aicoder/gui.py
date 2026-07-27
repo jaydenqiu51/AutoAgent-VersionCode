@@ -390,11 +390,19 @@ class AICoderApp:
     def __init__(self, root: tk.Tk):
         self.root = root
         self.root.title("AutoAgent")
-        self.root.geometry("1380x880")
+        self._load_config()
+        self.root.geometry(self._saved_config.get("geometry", "1380x880"))
         self.root.minsize(1100, 720)
+        try:
+            self.root.state("zoomed" if self._saved_config.get("zoomed", True)
+                            else "normal")
+        except Exception:
+            pass
         self.root.configure(bg=BG)
+        self._style_ttk()
         self._set_taskbar_icon(root)
         root.report_callback_exception = self._on_error
+        root.protocol("WM_DELETE_WINDOW", self._on_close)
 
         self._engine_thread = None
         self._engine = None
@@ -412,7 +420,6 @@ class AICoderApp:
         self._explorer_cwd = None
         self._toasts = Toast(root)
 
-        self._load_config()
         self._make_vars()
         try:
             self._build_ui()
@@ -430,6 +437,43 @@ class AICoderApp:
             self._toasts.show(str(val)[:100], "error", 5000)
         except Exception:
             pass
+
+    def _style_ttk(self):
+        """Dark ttk theme — keeps comboboxes and scrollbars from
+        rendering in the default light Windows style."""
+        st = ttk.Style(self.root)
+        try:
+            st.theme_use("clam")
+        except Exception:
+            pass
+        st.configure("TCombobox", fieldbackground=CARD, background=CARD2,
+                     foreground=FG, arrowcolor=FG_DIM, bordercolor=BORDER2,
+                     lightcolor=CARD, darkcolor=CARD, insertcolor=FG,
+                     selectbackground=CARD3, selectforeground=FG, padding=4)
+        st.map("TCombobox",
+               fieldbackground=[("readonly", CARD), ("disabled", BG2)],
+               foreground=[("disabled", FG_FAINT)],
+               background=[("active", CARD3)])
+        st.configure("Vertical.TScrollbar", background=CARD2, troughcolor=BG2,
+                     bordercolor=BG2, arrowcolor=FG_DIM,
+                     lightcolor=CARD2, darkcolor=CARD2)
+        st.map("Vertical.TScrollbar", background=[("active", CARD3)])
+        # The combobox dropdown is a plain Tk listbox — style it globally
+        self.root.option_add("*TCombobox*Listbox.background", CARD)
+        self.root.option_add("*TCombobox*Listbox.foreground", FG)
+        self.root.option_add("*TCombobox*Listbox.selectBackground", BLUE)
+        self.root.option_add("*TCombobox*Listbox.selectForeground", "white")
+        self.root.option_add("*TCombobox*Listbox.borderWidth", 0)
+
+    def _on_close(self):
+        """Persist everything (settings + window state) on exit."""
+        try:
+            if getattr(self, "_autosave_job", None):
+                self.root.after_cancel(self._autosave_job)
+        except Exception:
+            pass
+        self._save_config()
+        self.root.destroy()
 
     @staticmethod
     def _set_taskbar_icon(root):
@@ -557,6 +601,9 @@ class AICoderApp:
                 self._saved_config = json.loads(self.CONFIG_FILE.read_text())
         except Exception:
             self._saved_config = {}
+        # Older versions could save the goal-box placeholder as a goal
+        if self._saved_config.get("goal") == "Enter your improvement goal…":
+            self._saved_config["goal"] = ""
 
     def _make_vars(self):
         c = self._saved_config
@@ -567,6 +614,13 @@ class AICoderApp:
         self._target_var = tk.StringVar(value=str(c.get("target", "85")))
         self._max_var = tk.StringVar(value=str(c.get("max_iterations", "100")))
         self._goal_var = tk.StringVar(value=c.get("goal", ""))
+        # Auto-save: any settings change is persisted moments later,
+        # so nothing is ever lost between sessions.
+        self._autosave_job = None
+        for v in (self._prov_var, self._model_var, self._api_key_var,
+                  self._work_var, self._target_var, self._max_var,
+                  self._goal_var):
+            v.trace_add("write", self._schedule_autosave)
 
     def _model_id(self):
         """Raw model id with any '(Free …)' suffix stripped."""
@@ -576,13 +630,43 @@ class AICoderApp:
         """True when the chosen model runs without any API key."""
         return model_tag(self._prov_var.get(), self._model_var.get()) == "free"
 
-    def _save_config(self):
+    def _schedule_autosave(self, *_):
         try:
-            self.CONFIG_FILE.write_text(json.dumps({
-                "provider": self._prov_var.get(), "model": self._model_id(),
-                "api_key": self._api_key_var.get(), "workspace": self._work_var.get(),
-                "target": self._target_var.get(), "max_iterations": self._max_var.get(),
-                "goal": self._goal_var.get()}, indent=2))
+            if self._autosave_job:
+                self.root.after_cancel(self._autosave_job)
+            self._autosave_job = self.root.after(800, self._autosave)
+        except Exception:
+            pass
+
+    def _autosave(self):
+        self._autosave_job = None
+        self._save_config()
+        try:
+            if hasattr(self, "_badge_frame"):
+                self._refresh_badges()
+        except Exception:
+            pass
+
+    def _save_config(self):
+        data = {
+            "provider": self._prov_var.get(), "model": self._model_id(),
+            "api_key": self._api_key_var.get(), "workspace": self._work_var.get(),
+            "target": self._target_var.get(), "max_iterations": self._max_var.get(),
+            "goal": self._goal_value(),
+        }
+        try:
+            zoomed = self.root.state() == "zoomed"
+            data["zoomed"] = zoomed
+            data["geometry"] = (self.root.geometry() if not zoomed else
+                                self._saved_config.get("geometry", "1380x880"))
+        except Exception:
+            pass
+        self._saved_config.update(data)
+        try:
+            # Atomic write — a crash mid-save can never corrupt the file
+            tmp = self.CONFIG_FILE.with_suffix(".tmp")
+            tmp.write_text(json.dumps(data, indent=2))
+            os.replace(tmp, self.CONFIG_FILE)
         except Exception:
             pass
 
@@ -813,6 +897,11 @@ class AICoderApp:
         self._goal_entry.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(0, 12), pady=10)
         self._goal_ph = "Enter your improvement goal…"
         self._install_placeholder()
+        # Focus glow on the goal field
+        self._goal_entry.bind(
+            "<FocusIn>", lambda _: gbox.config(highlightbackground=GLOW_BRD), add="+")
+        self._goal_entry.bind(
+            "<FocusOut>", lambda _: gbox.config(highlightbackground=BORDER2), add="+")
 
         # Badges
         self._badge_frame = tk.Frame(inner, bg=TOPBAR)
@@ -876,8 +965,10 @@ class AICoderApp:
         self._status_lbl.pack(side=tk.LEFT)
         self._foot_iter = tk.Label(sb, text="", bg=BG2, fg=FG_DIM, font=(UI_FONT, 8))
         self._foot_iter.pack(side=tk.RIGHT, padx=16)
-        tk.Label(sb, text="Ctrl+↵ Run  ·  Esc Stop  ·  Ctrl+S Save",
+        tk.Label(sb, text="Ctrl+↵ Run  ·  Esc Stop  ·  settings auto-save",
                  bg=BG2, fg=FG_FAINT, font=(UI_FONT, 7)).pack(side=tk.RIGHT, padx=16)
+        tk.Label(sb, text="AutoAgent v0.1.0", bg=BG2, fg=FG_FAINT,
+                 font=(UI_FONT, 7)).pack(side=tk.RIGHT, padx=(0, 4))
 
     # ── Animated pulse ────────────────────────────────────────
     def _animate_pulse(self):
@@ -1498,15 +1589,23 @@ class AICoderApp:
         win = tk.Toplevel(self.root)
         win.title("Settings")
         win.configure(bg=BG2)
-        win.geometry("540x600")
         win.transient(self.root)
         win.grab_set()
+        win.resizable(False, False)
+        # Center over the main window
+        self.root.update_idletasks()
+        px = self.root.winfo_rootx() + (self.root.winfo_width() - 540) // 2
+        py = self.root.winfo_rooty() + (self.root.winfo_height() - 620) // 2
+        win.geometry(f"540x620+{max(px, 0)}+{max(py, 0)}")
+        win.bind("<Escape>", lambda e: win.destroy())
 
         body = tk.Frame(win, bg=BG2)
         body.pack(fill=tk.BOTH, expand=True, padx=28, pady=22)
 
         tk.Label(body, text="Settings", bg=BG2, fg=FG,
-                 font=(TITLE_FONT, 18, "bold")).pack(anchor=tk.W, pady=(0, 18))
+                 font=(TITLE_FONT, 18, "bold")).pack(anchor=tk.W)
+        tk.Label(body, text="Changes are saved automatically and kept between sessions",
+                 bg=BG2, fg=FG_FAINT, font=(UI_FONT, 8)).pack(anchor=tk.W, pady=(2, 16))
 
         # Provider
         tk.Label(body, text="PROVIDER", bg=BG2, fg=FG_FAINT,
@@ -1920,11 +2019,7 @@ class AICoderApp:
 # ═══════════════════════════════════════════════════════════════════
 def main():
     root = tk.Tk()
-    try:
-        root.state("zoomed")
-    except Exception:
-        pass
-    app = AICoderApp(root)
+    app = AICoderApp(root)   # restores saved window size/state itself
     root.mainloop()
 
 

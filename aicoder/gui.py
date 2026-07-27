@@ -1901,6 +1901,8 @@ class AICoderApp:
             return
         self._save_config()
         self._running = True
+        self._engine = None
+        self._stop_flag = threading.Event()
         self._iteration = 0
         self._max_iter = int(self._max_var.get() or 100)
         self._start_time = time.time()
@@ -1929,8 +1931,7 @@ class AICoderApp:
     def _run_engine(self):
         try:
             from aicoder.config import PROVIDER_INFO, config
-            from aicoder.core.engine import ImprovementEngine
-            from aicoder.core.tester import Tester, make_lint_check
+            from aicoder.core.agent import Agent
             from aicoder.core.tool_registry import ToolRegistry
             from aicoder.tools.file_tools import ListDirectoryTool, ReadFileTool, WriteFileTool
             from aicoder.tools.git_tools import GitDiffTool, GitLogTool, GitStatusTool
@@ -1977,41 +1978,92 @@ class AICoderApp:
                          GitStatusTool(), GitDiffTool(), GitLogTool()):
                 registry.register(tool)
 
-            # Validation: Python syntax must stay clean after every change
-            tester = Tester()
-            tester.add_check(make_lint_check())
-
-            try:
-                target = float(self._run_params["target"] or 85)
-            except ValueError:
-                target = 85.0
-            target = min(max(target, 1.0), 100.0)
-
             goal = self._run_params["goal"] or "Improve the overall quality of this project"
+            q = self._update_queue
+            rounds = max(self._max_iter, 1)
 
-            self._engine = ImprovementEngine(
-                goal=goal,
-                provider=provider,
-                tool_registry=registry,
-                tester=tester,
-                target_quality=target,
-                max_iterations=self._max_iter,
-                on_phase=lambda phase, detail: self._update_queue.put(("phase", phase, detail)),
-                on_improvement=lambda iid, title, result: self._update_queue.put(
-                    ("improvement", title, result, "")),
-                on_quality=lambda before, after, trend: self._update_queue.put(
-                    ("quality", after, after - before, f"trend: {trend}")),
-            )
-            report = self._engine.run()
-            self._update_queue.put(("final", report))
+            # Let the agent take enough steps to actually read + edit files,
+            # but keep each round bounded so Stop stays responsive.
+            config.max_iterations = 30
+
+            class _Stopped(Exception):
+                pass
+
+            def _check_stop():
+                if self._stop_flag.is_set():
+                    raise _Stopped()
+
+            def _on_think(text):
+                _check_stop()
+                if text and text.strip():
+                    q.put(("phase", "reason", text.strip().splitlines()[0][:160]))
+
+            def _on_tool(name, args):
+                _check_stop()
+                tgt = ""
+                if isinstance(args, dict):
+                    tgt = (args.get("path") or args.get("file_path")
+                           or args.get("pattern") or args.get("command")
+                           or args.get("query") or "")
+                q.put(("phase", name, f"{name} {tgt}".strip()[:160]))
+                if name in ("write_file", "edit_file") and tgt:
+                    q.put(("improvement", f"Edited {tgt}",
+                           "Agent wrote changes to the workspace.", ""))
+
+            # ── DIRECT CODING LOOP ─────────────────────────────────────
+            # Each round asks the agent to make one concrete improvement
+            # toward the goal — it reads the project and edits real files.
+            completed = 0
+            for i in range(1, rounds + 1):
+                if self._stop_flag.is_set():
+                    break
+                q.put(("phase", "implement",
+                       f"Round {i}/{rounds}: coding toward your goal…"))
+                if i == 1:
+                    task = (
+                        f"{goal}\n\n"
+                        f"Work inside the workspace at {config.workspace}. "
+                        f"Investigate the existing files first, then make the "
+                        f"change by actually editing/creating files with your tools."
+                    )
+                else:
+                    task = (
+                        f"Continue improving this project toward the goal:\n{goal}\n\n"
+                        f"Review the current state of the workspace at "
+                        f"{config.workspace} and make the next concrete "
+                        f"improvement. Actually edit or create files — don't just "
+                        f"describe what to do."
+                    )
+                agent = Agent(
+                    task=task,
+                    provider=provider,
+                    tool_registry=registry,
+                    on_thinking=_on_think,
+                    on_tool_call=_on_tool,
+                )
+                try:
+                    result = agent.run()
+                except _Stopped:
+                    break
+                completed = i
+                q.put(("improvement", f"Round {i} complete",
+                       (result or "Done.")[:400], ""))
+
+            self._update_queue.put(
+                ("final", f"Coding session finished after {completed} round(s)."))
         except Exception as e:
             self._update_queue.put(("error", str(e)))
         finally:
             self._update_queue.put(("done",))
 
     def _stop_engine(self):
-        if self._engine:
-            self._engine.stop()
+        if getattr(self, "_stop_flag", None) is not None:
+            self._stop_flag.set()
+        if self._engine is not None and hasattr(self._engine, "stop"):
+            try:
+                self._engine.stop()
+            except Exception:
+                pass
         self._running = False
         self._run_btn.configure(state=tk.NORMAL)
         self._stop_btn.configure(state=tk.DISABLED)

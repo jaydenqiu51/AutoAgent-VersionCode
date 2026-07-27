@@ -132,7 +132,7 @@ PROVIDER_DEFAULTS = {
     "xai":          {"model": "grok-2", "key_env": "XAI_API_KEY", "hint": "xai-..."},
     "openrouter":   {"model": "openai/gpt-4o", "key_env": "OPENROUTER_API_KEY", "hint": "sk-or-..."},
     "qwen":         {"model": "qwen-plus", "key_env": "DASHSCOPE_API_KEY", "hint": "sk-..."},
-    "kimi":         {"model": "moonshot-v1-8k", "key_env": "MOONSHOT_API_KEY", "hint": "sk-..."},
+    "kimi":         {"model": "kimi-k3", "key_env": "MOONSHOT_API_KEY", "hint": "sk-..."},
     "glm":          {"model": "glm-4-flash", "key_env": "ZHIPUAI_API_KEY", "hint": "..."},
 }
 PROVIDER_LIST = list(PROVIDER_DEFAULTS.keys())
@@ -254,6 +254,7 @@ MODEL_CATALOG = {
         ("anthropic/claude-sonnet-4", None), ("anthropic/claude-opus-4", None),
         ("google/gemini-2.5-pro", None), ("google/gemini-2.5-flash", None),
         ("x-ai/grok-4", None), ("deepseek/deepseek-chat-v3-0324", None),
+        ("moonshotai/kimi-k3", None), ("moonshotai/kimi-k2.7-code", None),
         ("meta-llama/llama-3.3-70b-instruct", None),
         ("mistralai/mistral-large-2411", None),
     ],
@@ -264,10 +265,9 @@ MODEL_CATALOG = {
         ("qwen-math-plus", None), ("qwq-plus", None),
     ],
     "kimi": [
-        ("kimi-k2-0711-preview", None), ("kimi-k2-turbo-preview", None),
-        ("kimi-latest", None), ("kimi-thinking-preview", None),
-        ("moonshot-v1-8k", None), ("moonshot-v1-32k", None),
-        ("moonshot-v1-128k", None), ("moonshot-v1-auto", None),
+        ("kimi-k3", None), ("kimi-k2.7-code", None),
+        ("kimi-k2.7-code-highspeed", None), ("kimi-k2.6", None),
+        ("kimi-k2.5", None),
     ],
     "glm": [
         ("glm-4-flash", "freetier"), ("glm-4-flashx", "freetier"),

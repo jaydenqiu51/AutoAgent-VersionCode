@@ -1912,57 +1912,98 @@ class AICoderApp:
         self._status_dot.config(fg=GREEN)
         goal = self._goal_value()
         self._obj_lbl.config(text=goal if goal else "Auto-improvement mode")
+        # Snapshot every setting on the main thread — the worker must not
+        # touch tkinter variables
+        self._run_params = {
+            "prov": prov,
+            "key": key,
+            "model": self._model_id(),
+            "workspace": ws,
+            "target": self._target_var.get(),
+            "goal": goal,
+        }
         self._toasts.show("Engine started", "success", 2000)
         self._engine_thread = threading.Thread(target=self._run_engine, daemon=True)
         self._engine_thread.start()
 
     def _run_engine(self):
         try:
-            from aicoder.core.engine import ContinuousEngine
-            from openai import OpenAI
-            prov = self._prov_var.get()
-            key = self._api_key_var.get().strip()
-            model = self._model_id()
-            if prov == "ollama":
-                client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
-            elif prov == "deepseek":
-                client = OpenAI(base_url="https://api.deepseek.com/v1", api_key=key)
-            elif prov == "groq":
-                client = OpenAI(base_url="https://api.groq.com/openai/v1", api_key=key)
-            elif prov == "together":
-                client = OpenAI(base_url="https://api.together.xyz/v1", api_key=key)
-            elif prov == "fireworks":
-                client = OpenAI(base_url="https://api.fireworks.ai/inference/v1", api_key=key)
-            elif prov == "perplexity":
-                client = OpenAI(base_url="https://api.perplexity.ai", api_key=key)
-            elif prov == "xai":
-                client = OpenAI(base_url="https://api.x.ai/v1", api_key=key)
-            elif prov == "openrouter":
-                client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=key)
-            elif prov == "qwen":
-                client = OpenAI(base_url="https://dashscope.aliyuncs.com/compatible-mode/v1", api_key=key)
-            elif prov == "kimi":
-                client = OpenAI(base_url="https://api.moonshot.cn/v1", api_key=key)
-            elif prov == "glm":
-                client = OpenAI(base_url="https://open.bigmodel.cn/api/paas/v4", api_key=key)
-            elif prov == "gemini":
-                client = OpenAI(base_url="https://generativelanguage.googleapis.com/v1beta/openai", api_key=key)
+            from aicoder.config import PROVIDER_INFO, config
+            from aicoder.core.engine import ImprovementEngine
+            from aicoder.core.tester import Tester, make_lint_check
+            from aicoder.core.tool_registry import ToolRegistry
+            from aicoder.tools.file_tools import ListDirectoryTool, ReadFileTool, WriteFileTool
+            from aicoder.tools.git_tools import GitDiffTool, GitLogTool, GitStatusTool
+            from aicoder.tools.search_tools import GlobTool, GrepTool, WebSearchTool
+            from aicoder.tools.shell_tool import ShellTool
+
+            prov = self._run_params["prov"]
+            key = self._run_params["key"]
+            model = self._run_params["model"]
+
+            # Point the framework at the chosen workspace / model
+            config.workspace = Path(self._run_params["workspace"])
+            config.provider = prov
+            config.model = model
+            if key:
+                config.api_key = key
+
+            # Build the LLM provider (lazy imports keep optional deps optional)
+            if prov == "openai":
+                from aicoder.llm.openai_provider import OpenAIProvider
+                provider = OpenAIProvider(model=model, api_key=key)
             elif prov == "anthropic":
-                client = OpenAI(api_key=key)  # wrap through compatibility
+                from aicoder.llm.anthropic_provider import AnthropicProvider
+                provider = AnthropicProvider(model=model, api_key=key)
+            elif prov == "gemini":
+                from aicoder.llm.gemini_provider import GeminiProvider
+                provider = GeminiProvider(model=model, api_key=key)
+            elif prov == "ollama":
+                from aicoder.llm.ollama_provider import OllamaProvider
+                provider = OllamaProvider(model=model)
+            elif prov == "openrouter":
+                from aicoder.llm.openrouter_provider import OpenRouterProvider
+                provider = OpenRouterProvider(model=model, api_key=key or "free")
             else:
-                client = OpenAI(api_key=key)
-            target = float(self._target_var.get() or 85) / 100.0
-            ws = Path(self._work_var.get())
-            goal = self._goal_value()
-            self._engine = ContinuousEngine(
-                client=client, model=model, workspace=ws,
-                target_quality=target, max_iterations=self._max_iter,
-                goal=goal if goal else None,
+                from aicoder.llm.openai_compatible_provider import OpenAICompatibleProvider
+                api_base = PROVIDER_INFO.get(prov, {}).get("api_base")
+                provider = OpenAICompatibleProvider(model=model, api_key=key or "free",
+                                                    api_base=api_base)
+
+            # Full tool belt — same set the CLI gives the agent
+            registry = ToolRegistry()
+            for tool in (ReadFileTool(), WriteFileTool(), ListDirectoryTool(),
+                         ShellTool(), GrepTool(), GlobTool(), WebSearchTool(),
+                         GitStatusTool(), GitDiffTool(), GitLogTool()):
+                registry.register(tool)
+
+            # Validation: Python syntax must stay clean after every change
+            tester = Tester()
+            tester.add_check(make_lint_check())
+
+            try:
+                target = float(self._run_params["target"] or 85)
+            except ValueError:
+                target = 85.0
+            target = min(max(target, 1.0), 100.0)
+
+            goal = self._run_params["goal"] or "Improve the overall quality of this project"
+
+            self._engine = ImprovementEngine(
+                goal=goal,
+                provider=provider,
+                tool_registry=registry,
+                tester=tester,
+                target_quality=target,
+                max_iterations=self._max_iter,
                 on_phase=lambda phase, detail: self._update_queue.put(("phase", phase, detail)),
-                on_improvement=lambda title, desc, diff: self._update_queue.put(("improvement", title, desc, diff)),
-                on_quality=lambda score, delta, summary: self._update_queue.put(("quality", score, delta, summary)),
+                on_improvement=lambda iid, title, result: self._update_queue.put(
+                    ("improvement", title, result, "")),
+                on_quality=lambda before, after, trend: self._update_queue.put(
+                    ("quality", after, after - before, f"trend: {trend}")),
             )
-            self._engine.run()
+            report = self._engine.run()
+            self._update_queue.put(("final", report))
         except Exception as e:
             self._update_queue.put(("error", str(e)))
         finally:
@@ -2015,7 +2056,9 @@ class AICoderApp:
 
         if kind == "phase":
             phase, detail = msg[1], msg[2]
-            self._iteration += 1
+            # One engine iteration = one improvement attempt
+            if phase == "implement":
+                self._iteration += 1
             # Log
             self._log(f"[{phase}] {detail}", "phase", ts)
             # Update objective
@@ -2058,8 +2101,11 @@ class AICoderApp:
             if diff:
                 self._changes_text.insert(tk.END, diff[:800] + "\n", "dim")
             self._changes_text.configure(state=tk.DISABLED)
-            self._sys_metrics["snapshots"]["val"].config(
-                text=str(int(self._sys_metrics["snapshots"]["val"].cget("text") or 0) + 1))
+            try:
+                snaps = int(self._sys_metrics["snapshots"]["val"].cget("text"))
+            except (ValueError, TypeError):
+                snaps = 0
+            self._sys_metrics["snapshots"]["val"].config(text=str(snaps + 1))
             # Roadmap
             try:
                 if self._engine and hasattr(self._engine, '_roadmap'):
@@ -2081,6 +2127,10 @@ class AICoderApp:
             self._draw_ring(self._gauge, pct, GREEN, f"{pct:.0f}%", big=True)
             self._sys_metrics["quality"]["val"].config(text=f"{pct:.1f}%")
             self._update_spark_mini("quality", pct)
+
+        elif kind == "final":
+            for line in msg[1].split("\n"):
+                self._log(line, "dim", ts)
 
         elif kind == "error":
             self._log(f"ERROR: {msg[1]}", "error", ts)

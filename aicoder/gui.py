@@ -65,6 +65,52 @@ PINK     = "#ff80ab"    # pink
 TRACK    = "#101828"    # gauge/bar track
 TRACK2   = "#182038"    # lighter track
 
+# Toast backgrounds
+TOAST_INFO_BG = "#0d1e3a"
+TOAST_OK_BG   = "#0d2a1a"
+TOAST_ERR_BG  = "#2a0d0d"
+TOAST_WARN_BG = "#2a1f0d"
+STOP_HOVER    = "#3a1818"   # stop-button hover
+
+# ── THEMES ── every color above, per theme.  The module-level names
+# stay authoritative: apply_palette() rewrites them in place, and all
+# widgets are rebuilt afterwards so the change takes effect everywhere.
+PALETTES = {
+    "dark": dict(
+        BG="#06080e", BG2="#0a0d16", BG3="#0e1220",
+        SIDEBAR="#080c16", TOPBAR="#090d17",
+        CARD="#0f1525", CARD2="#141c2e", CARD3="#1a2438",
+        BORDER="#162036", BORDER2="#1e2d4a", GLOW_BRD="#253a60",
+        FG="#f0f4ff", FG2="#c0c8e0", FG_DIM="#7888a8", FG_FAINT="#3d4e6e",
+        BLUE="#4f8fff", BLUE_HL="#6fa8ff", CYAN="#00e5ff", GREEN="#00e676",
+        TEAL="#1de9b6", PURPLE="#b388ff", VIOLET="#7c4dff", ORANGE="#ff9100",
+        RED="#ff5252", YELLOW="#ffd740", PINK="#ff80ab",
+        TRACK="#101828", TRACK2="#182038",
+        TOAST_INFO_BG="#0d1e3a", TOAST_OK_BG="#0d2a1a",
+        TOAST_ERR_BG="#2a0d0d", TOAST_WARN_BG="#2a1f0d",
+        STOP_HOVER="#3a1818",
+    ),
+    "light": dict(
+        BG="#f2f4fa", BG2="#eaeef6", BG3="#e2e8f2",
+        SIDEBAR="#e8ecf5", TOPBAR="#edf0f8",
+        CARD="#ffffff", CARD2="#f0f3fa", CARD3="#e3e9f4",
+        BORDER="#d7deeb", BORDER2="#c2cde0", GLOW_BRD="#9fb4d8",
+        FG="#141b2e", FG2="#3a4560", FG_DIM="#68748f", FG_FAINT="#9aa6bd",
+        BLUE="#2f6fe4", BLUE_HL="#1d5dd2", CYAN="#0092b8", GREEN="#0a9d58",
+        TEAL="#00897b", PURPLE="#7e57c2", VIOLET="#5e35b1", ORANGE="#e8710a",
+        RED="#d93030", YELLOW="#c99700", PINK="#d81b60",
+        TRACK="#dde3ef", TRACK2="#d0d8e8",
+        TOAST_INFO_BG="#e1ebff", TOAST_OK_BG="#dff3e6",
+        TOAST_ERR_BG="#fce3e3", TOAST_WARN_BG="#fcefdc",
+        STOP_HOVER="#f3d3d3",
+    ),
+}
+
+
+def apply_palette(name):
+    """Swap every module-level color to the chosen theme's values."""
+    globals().update(PALETTES.get(name, PALETTES["dark"]))
+
 UI_FONT   = "Segoe UI"
 MONO_FONT = "Consolas"
 TITLE_FONT = "Segoe UI Semibold"
@@ -294,8 +340,8 @@ class Toast:
         self._showing = False
 
     def show(self, message, kind="info", duration=3200):
-        colors = {"info": (BLUE, "#0d1e3a"), "success": (GREEN, "#0d2a1a"),
-                  "error": (RED, "#2a0d0d"), "warn": (ORANGE, "#2a1f0d")}
+        colors = {"info": (BLUE, TOAST_INFO_BG), "success": (GREEN, TOAST_OK_BG),
+                  "error": (RED, TOAST_ERR_BG), "warn": (ORANGE, TOAST_WARN_BG)}
         accent, bg = colors.get(kind, colors["info"])
         self._queue.append((message, accent, bg, duration))
         if not self._showing:
@@ -391,6 +437,8 @@ class AICoderApp:
         self.root = root
         self.root.title("AutoAgent")
         self._load_config()
+        self._theme = self._saved_config.get("theme", "dark")
+        apply_palette(self._theme)
         self.root.geometry(self._saved_config.get("geometry", "1380x880"))
         self.root.minsize(1100, 720)
         try:
@@ -474,6 +522,53 @@ class AICoderApp:
             pass
         self._save_config()
         self.root.destroy()
+
+    # ── Theme switching ──────────────────────────────────
+    def _set_theme(self, name, reopen_settings=False):
+        if name not in PALETTES or name == self._theme:
+            return
+        self._theme = name
+        apply_palette(name)
+        self._save_config()
+        self._rebuild_ui()
+        if reopen_settings:
+            self._open_settings()
+        self._toasts.show(f"{name.capitalize()} theme applied", "success", 2000)
+
+    def _toggle_theme(self):
+        self._set_theme("light" if self._theme == "dark" else "dark")
+
+    def _rebuild_ui(self):
+        """Re-skin everything in place after a palette change."""
+        # The goal placeholder must not survive the rebuild as real text
+        if getattr(self, "_goal_ph_on", False):
+            self._goal_var.set("")
+        for w in self.root.winfo_children():
+            w.destroy()
+        self._agent_widgets = {}
+        self._nav_items = {}
+        self.root.configure(bg=BG)
+        self._style_ttk()
+        self._build_ui()
+        # Replay the session log into the fresh widgets
+        try:
+            for ts, text, tag in self._activity_log[-400:]:
+                self._output_text.insert(tk.END, f"{ts}  ", "time")
+                self._output_text.insert(tk.END, text + "\n", tag)
+                self._activity_text.insert(tk.END, f"{ts}  ", "time")
+                self._activity_text.insert(tk.END, text + "\n", tag)
+            self._output_text.see(tk.END)
+            self._activity_text.see(tk.END)
+        except Exception:
+            pass
+        # Restore run-state visuals
+        if self._running:
+            self._run_btn.configure(state=tk.DISABLED)
+            self._stop_btn.configure(state=tk.NORMAL)
+            self._engine_state_lbl.config(text="Running", fg=GREEN)
+            self._engine_dot.config(fg=GREEN)
+            self._status_lbl.config(text="Engine running")
+            self._status_dot.config(fg=GREEN)
 
     @staticmethod
     def _set_taskbar_icon(root):
@@ -653,6 +748,7 @@ class AICoderApp:
             "api_key": self._api_key_var.get(), "workspace": self._work_var.get(),
             "target": self._target_var.get(), "max_iterations": self._max_var.get(),
             "goal": self._goal_value(),
+            "theme": getattr(self, "_theme", "dark"),
         }
         try:
             zoomed = self.root.state() == "zoomed"
@@ -913,9 +1009,15 @@ class AICoderApp:
                                   bg=BLUE, bg_h=BLUE_HL, tip="Ctrl+Enter")
         self._run_btn.pack(side=tk.LEFT, padx=(4, 8))
         self._stop_btn = self._btn(inner, "■  Stop", self._stop_engine,
-                                   bg=CARD2, bg_h="#3a1818", fg=FG_DIM, tip="Escape")
+                                   bg=CARD2, bg_h=STOP_HOVER, fg=FG_DIM, tip="Escape")
         self._stop_btn.configure(state=tk.DISABLED)
         self._stop_btn.pack(side=tk.LEFT)
+        # Theme toggle
+        self._theme_btn = self._btn(
+            inner, "☀" if self._theme == "dark" else "☾", self._toggle_theme,
+            bg=CARD2, bg_h=CARD3, fg=FG_DIM, padx=10,
+            tip="Switch light / dark theme")
+        self._theme_btn.pack(side=tk.LEFT, padx=(8, 0))
 
     def _install_placeholder(self):
         e = self._goal_entry
@@ -1595,8 +1697,8 @@ class AICoderApp:
         # Center over the main window
         self.root.update_idletasks()
         px = self.root.winfo_rootx() + (self.root.winfo_width() - 540) // 2
-        py = self.root.winfo_rooty() + (self.root.winfo_height() - 620) // 2
-        win.geometry(f"540x620+{max(px, 0)}+{max(py, 0)}")
+        py = self.root.winfo_rooty() + (self.root.winfo_height() - 700) // 2
+        win.geometry(f"540x700+{max(px, 0)}+{max(py, 0)}")
         win.bind("<Escape>", lambda e: win.destroy())
 
         body = tk.Frame(win, bg=BG2)
@@ -1702,6 +1804,20 @@ class AICoderApp:
             ef.pack(fill=tk.X)
             tk.Entry(ef, textvariable=var, bg=CARD, fg=FG, insertbackground=FG,
                      relief=tk.FLAT, bd=0, font=(MONO_FONT, 10), width=10).pack(padx=8, pady=8)
+
+        # Appearance
+        tk.Label(body, text="THEME", bg=BG2, fg=FG_FAINT,
+                 font=(UI_FONT, 7, "bold")).pack(anchor=tk.W, pady=(0, 5))
+        tf = tk.Frame(body, bg=CARD, highlightbackground=BORDER2, highlightthickness=1)
+        tf.pack(fill=tk.X, pady=(0, 12))
+        theme_var = tk.StringVar(value=self._theme.capitalize())
+        theme_combo = ttk.Combobox(tf, textvariable=theme_var,
+                                   values=["Dark", "Light"], state="readonly",
+                                   font=(UI_FONT, 10))
+        theme_combo.pack(fill=tk.X, padx=8, pady=8)
+        theme_combo.bind("<<ComboboxSelected>>",
+                         lambda e: self._set_theme(theme_var.get().lower(),
+                                                   reopen_settings=True))
 
         # Buttons
         brow = tk.Frame(body, bg=BG2)

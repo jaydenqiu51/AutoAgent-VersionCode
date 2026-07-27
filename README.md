@@ -51,7 +51,8 @@ This creates a self-improving development loop.
 - **Quality Metrics** — Tracks quality over time with category-level scoring, trend analysis, and target thresholds
 - **Test Validator** — Verifies improvements don't break the project (custom test functions, file checks, command checks)
 - **14 Pluggable LLM Providers** — OpenAI, Anthropic, Gemini, Ollama, DeepSeek, Groq, Together, Fireworks, Perplexity, xAI, OpenRouter, Qwen, Kimi, GLM
-- **Built-in Model Catalog** — **100+ models** in a Settings dropdown; free models are labelled **(Free — No API Key needed)** / **(Free)** and the key field disables itself for keyless models
+- **Built-in Model Catalog** — **185+ models** in a Settings dropdown; free models are labelled **(Free — No API Key needed)** / **(Free)** and the key field disables itself for keyless models
+- **Dark & Light Themes** — switch instantly with the ☀ / ☾ button in the top bar (or in Settings); your choice, window size, and every setting are remembered between sessions
 - **Extensible Tools** — File I/O, shell execution, regex/grep search, glob file matching, git operations
 - **Safety First** — Shell sandboxing blocks dangerous commands; file writes restricted to workspace
 - **pip-Installable** — Single command install with `aicoder` CLI entry point

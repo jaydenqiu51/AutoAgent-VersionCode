@@ -140,7 +140,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **GLM (Zhipu AI)** | glm-4-flash | **FREE** | Free key | [open.bigmodel.cn](https://open.bigmodel.cn) |
 | **OpenRouter** | 100+ models, many `:free` | **FREE** (`:free` models) and up | Free key | [openrouter.ai/keys](https://openrouter.ai/keys) |
 | **DeepSeek** | deepseek-chat | $0.27 / $1.12 | Paid key | [platform.deepseek.com](https://platform.deepseek.com) |
-| **Qwen (Alibaba)** | qwen-plus | $0.26 / $0.78 | Paid key | [dashscope.aliyun.com](https://dashscope.console.aliyun.com) |
+| **Qwen (Alibaba)** | qwen-plus | $0.17 / $0.51 | Paid key | [dashscope.aliyun.com](https://dashscope.console.aliyun.com) |
 | **Kimi (Moonshot)** | kimi-k3 | $3.00 / $15.00 | Paid key | [platform.moonshot.cn](https://platform.moonshot.cn) |
 |  | kimi-k2.7-code | $0.73 / $3.50 |  |  |
 | **Together AI** | Llama 3.3 70B Turbo | $0.88 / $0.88 (+ free models) | Key (has free models) | [together.ai](https://together.ai) |
@@ -154,7 +154,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
 
-_All prices in USD ($) · Last updated: 2026-07-28 15:54 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-07-28 20:37 UTC · auto-refreshes every 2 hours_
 <!-- PRICING:END -->
 
 <!-- MODELS:START -->
@@ -259,7 +259,7 @@ _All prices in USD ($) · Last updated: 2026-07-28 15:54 UTC · auto-refreshes e
 | Together AI | `Llama-4-Scout-17B-16E` | $0.10 / $0.30 |
 | Together AI | `Qwen2.5-72B-Instruct-Turbo` | $0.36 / $0.40 |
 | Together AI | `Qwen2.5-Coder-32B-Instruct` | $0.66 / $1.00 |
-| Together AI | `Qwen3-235B-A22B` | $0.45 / $1.82 |
+| Together AI | `Qwen3-235B-A22B` | $0.30 / $1.18 |
 | Together AI | `QwQ-32B` | see provider site |
 | Together AI | `DeepSeek-V3` | $0.27 / $1.12 |
 | Together AI | `DeepSeek-R1` | $0.70 / $2.50 |
@@ -275,7 +275,7 @@ _All prices in USD ($) · Last updated: 2026-07-28 15:54 UTC · auto-refreshes e
 | Fireworks | `llama4-scout-instruct-basic` | $0.10 / $0.30 |
 | Fireworks | `qwen2p5-coder-32b-instruct` | $0.66 / $1.00 |
 | Fireworks | `qwen2p5-72b-instruct` | $0.36 / $0.40 |
-| Fireworks | `qwen3-235b-a22b` | $0.45 / $1.82 |
+| Fireworks | `qwen3-235b-a22b` | $0.30 / $1.18 |
 | Fireworks | `qwq-32b` | see provider site |
 | Fireworks | `deepseek-v3` | $0.27 / $1.12 |
 | Fireworks | `deepseek-r1` | $0.70 / $2.50 |
@@ -321,7 +321,7 @@ _All prices in USD ($) · Last updated: 2026-07-28 15:54 UTC · auto-refreshes e
 | OpenRouter | `meta-llama/llama-3.3-70b-instruct` | $0.13 / $0.40 |
 | OpenRouter | `mistralai/mistral-large-2411` | see provider site |
 | Qwen (Alibaba) | `qwen-max` | see provider site |
-| Qwen (Alibaba) | `qwen-plus` | $0.26 / $0.78 |
+| Qwen (Alibaba) | `qwen-plus` | $0.17 / $0.51 |
 | Qwen (Alibaba) | `qwen-turbo` | see provider site |
 | Qwen (Alibaba) | `qwen-long` | see provider site |
 | Qwen (Alibaba) | `qwen3-coder-plus` | $0.30 / $1.00 |
@@ -349,7 +349,7 @@ _All prices in USD ($) · Last updated: 2026-07-28 15:54 UTC · auto-refreshes e
 | GLM (Zhipu AI) | `glm-4v-plus` | see provider site |
 | GLM (Zhipu AI) | `glm-z1-air` | see provider site |
 
-_All prices in USD ($) · Last updated: 2026-07-28 15:54 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-07-28 20:37 UTC · auto-refreshes every 2 hours_
 
 </details>
 <!-- MODELS:END -->

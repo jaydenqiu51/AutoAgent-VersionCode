@@ -142,7 +142,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **DeepSeek** | deepseek-chat | $0.27 / $1.12 | Paid key | [platform.deepseek.com](https://platform.deepseek.com) |
 | **Qwen (Alibaba)** | qwen-plus | $0.26 / $0.78 | Paid key | [dashscope.aliyun.com](https://dashscope.console.aliyun.com) |
 | **Kimi (Moonshot)** | kimi-k3 | $3.00 / $15.00 | Paid key | [platform.moonshot.cn](https://platform.moonshot.cn) |
-|  | kimi-k2.7-code | $0.73 / $3.50 |  |  |
+|  | kimi-k2.7-code | $0.70 / $3.50 |  |  |
 | **Together AI** | Llama 3.3 70B Turbo | $0.88 / $0.88 (+ free models) | Key (has free models) | [together.ai](https://together.ai) |
 | **Fireworks** | Llama 3.3 70B | $0.90 / $0.90 | Paid key | [fireworks.ai](https://fireworks.ai) |
 | **OpenAI** | gpt-4o | $2.50 / $10.00 | Paid key | [platform.openai.com](https://platform.openai.com) |
@@ -154,7 +154,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
 
-_All prices in USD ($) · Last updated: 2026-08-05 10:09 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-08-05 17:13 UTC · auto-refreshes every 2 hours_
 <!-- PRICING:END -->
 
 <!-- MODELS:START -->
@@ -317,7 +317,7 @@ _All prices in USD ($) · Last updated: 2026-08-05 10:09 UTC · auto-refreshes e
 | OpenRouter | `x-ai/grok-4` | see provider site |
 | OpenRouter | `deepseek/deepseek-chat-v3-0324` | $0.27 / $1.12 |
 | OpenRouter | `moonshotai/kimi-k3` | $3.00 / $15.00 |
-| OpenRouter | `moonshotai/kimi-k2.7-code` | $0.73 / $3.50 |
+| OpenRouter | `moonshotai/kimi-k2.7-code` | $0.70 / $3.50 |
 | OpenRouter | `meta-llama/llama-3.3-70b-instruct` | $0.10 / $0.32 |
 | OpenRouter | `mistralai/mistral-large-2411` | see provider site |
 | Qwen (Alibaba) | `qwen-max` | see provider site |
@@ -331,7 +331,7 @@ _All prices in USD ($) · Last updated: 2026-08-05 10:09 UTC · auto-refreshes e
 | Qwen (Alibaba) | `qwen-math-plus` | see provider site |
 | Qwen (Alibaba) | `qwq-plus` | see provider site |
 | Kimi (Moonshot) | `kimi-k3` | $3.00 / $15.00 |
-| Kimi (Moonshot) | `kimi-k2.7-code` | $0.73 / $3.50 |
+| Kimi (Moonshot) | `kimi-k2.7-code` | $0.70 / $3.50 |
 | Kimi (Moonshot) | `kimi-k2.7-code-highspeed` | see provider site |
 | Kimi (Moonshot) | `kimi-k2.6` | $0.59 / $2.48 |
 | Kimi (Moonshot) | `kimi-k2.5` | $0.57 / $2.85 |
@@ -349,7 +349,7 @@ _All prices in USD ($) · Last updated: 2026-08-05 10:09 UTC · auto-refreshes e
 | GLM (Zhipu AI) | `glm-4v-plus` | see provider site |
 | GLM (Zhipu AI) | `glm-z1-air` | see provider site |
 
-_All prices in USD ($) · Last updated: 2026-08-05 10:09 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-08-05 17:13 UTC · auto-refreshes every 2 hours_
 
 </details>
 <!-- MODELS:END -->

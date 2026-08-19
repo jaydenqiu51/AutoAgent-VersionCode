@@ -139,7 +139,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **Groq** | llama-3.3-70b-versatile | **FREE tier** (paid: $0.59 / $0.79) | Free key | [console.groq.com](https://console.groq.com) |
 | **GLM (Zhipu AI)** | glm-4-flash | **FREE** | Free key | [open.bigmodel.cn](https://open.bigmodel.cn) |
 | **OpenRouter** | 100+ models, many `:free` | **FREE** (`:free` models) and up | Free key | [openrouter.ai/keys](https://openrouter.ai/keys) |
-| **DeepSeek** | deepseek-chat | $0.27 / $1.12 | Paid key | [platform.deepseek.com](https://platform.deepseek.com) |
+| **DeepSeek** | deepseek-chat | $0.25 / $1.00 | Paid key | [platform.deepseek.com](https://platform.deepseek.com) |
 | **Qwen (Alibaba)** | qwen-plus | $0.26 / $0.78 | Paid key | [dashscope.aliyun.com](https://dashscope.console.aliyun.com) |
 | **Kimi (Moonshot)** | kimi-k3 | $3.00 / $15.00 | Paid key | [platform.moonshot.cn](https://platform.moonshot.cn) |
 |  | kimi-k2.7-code | $0.71 / $3.50 |  |  |
@@ -154,7 +154,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
 
-_All prices in USD ($) · Last updated: 2026-08-19 10:59 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-08-19 14:05 UTC · auto-refreshes every 2 hours_
 <!-- PRICING:END -->
 
 <!-- MODELS:START -->
@@ -234,7 +234,7 @@ _All prices in USD ($) · Last updated: 2026-08-19 10:59 UTC · auto-refreshes e
 | Ollama (local) | `dolphin3` | **FREE — No API Key needed** |
 | Ollama (local) | `olmo2` | **FREE — No API Key needed** |
 | Ollama (local) | `openthinker` | **FREE — No API Key needed** |
-| DeepSeek | `deepseek-chat` | $0.27 / $1.12 |
+| DeepSeek | `deepseek-chat` | $0.25 / $1.00 |
 | DeepSeek | `deepseek-reasoner` | $0.70 / $2.50 |
 | Groq | `llama-3.3-70b-versatile` | **FREE** (with free key) |
 | Groq | `llama-3.1-8b-instant` | **FREE** (with free key) |
@@ -261,7 +261,7 @@ _All prices in USD ($) · Last updated: 2026-08-19 10:59 UTC · auto-refreshes e
 | Together AI | `Qwen2.5-Coder-32B-Instruct` | $0.66 / $1.00 |
 | Together AI | `Qwen3-235B-A22B` | $0.45 / $1.82 |
 | Together AI | `QwQ-32B` | see provider site |
-| Together AI | `DeepSeek-V3` | $0.27 / $1.12 |
+| Together AI | `DeepSeek-V3` | $0.25 / $1.00 |
 | Together AI | `DeepSeek-R1` | $0.70 / $2.50 |
 | Together AI | `Mixtral-8x7B-Instruct` | see provider site |
 | Together AI | `Mixtral-8x22B-Instruct` | $2.00 / $6.00 |
@@ -277,7 +277,7 @@ _All prices in USD ($) · Last updated: 2026-08-19 10:59 UTC · auto-refreshes e
 | Fireworks | `qwen2p5-72b-instruct` | $0.36 / $0.40 |
 | Fireworks | `qwen3-235b-a22b` | $0.45 / $1.82 |
 | Fireworks | `qwq-32b` | see provider site |
-| Fireworks | `deepseek-v3` | $0.27 / $1.12 |
+| Fireworks | `deepseek-v3` | $0.25 / $1.00 |
 | Fireworks | `deepseek-r1` | $0.70 / $2.50 |
 | Fireworks | `mixtral-8x22b-instruct` | $2.00 / $6.00 |
 | Fireworks | `mistral-small-24b-instruct` | $0.05 / $0.08 |
@@ -315,7 +315,7 @@ _All prices in USD ($) · Last updated: 2026-08-19 10:59 UTC · auto-refreshes e
 | OpenRouter | `google/gemini-2.5-pro` | $1.25 / $10.00 |
 | OpenRouter | `google/gemini-2.5-flash` | $0.30 / $2.50 |
 | OpenRouter | `x-ai/grok-4` | see provider site |
-| OpenRouter | `deepseek/deepseek-chat-v3-0324` | $0.27 / $1.12 |
+| OpenRouter | `deepseek/deepseek-chat-v3-0324` | $0.25 / $1.00 |
 | OpenRouter | `moonshotai/kimi-k3` | $3.00 / $15.00 |
 | OpenRouter | `moonshotai/kimi-k2.7-code` | $0.71 / $3.50 |
 | OpenRouter | `meta-llama/llama-3.3-70b-instruct` | $0.10 / $0.32 |
@@ -349,7 +349,7 @@ _All prices in USD ($) · Last updated: 2026-08-19 10:59 UTC · auto-refreshes e
 | GLM (Zhipu AI) | `glm-4v-plus` | see provider site |
 | GLM (Zhipu AI) | `glm-z1-air` | see provider site |
 
-_All prices in USD ($) · Last updated: 2026-08-19 10:59 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-08-19 14:05 UTC · auto-refreshes every 2 hours_
 
 </details>
 <!-- MODELS:END -->

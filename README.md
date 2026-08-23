@@ -154,7 +154,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
 
-_All prices in USD ($) · Last updated: 2026-08-23 12:33 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-08-23 14:19 UTC · auto-refreshes every 2 hours_
 <!-- PRICING:END -->
 
 <!-- MODELS:START -->
@@ -349,7 +349,7 @@ _All prices in USD ($) · Last updated: 2026-08-23 12:33 UTC · auto-refreshes e
 | GLM (Zhipu AI) | `glm-4v-plus` | see provider site |
 | GLM (Zhipu AI) | `glm-z1-air` | see provider site |
 
-_All prices in USD ($) · Last updated: 2026-08-23 12:33 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-08-23 14:19 UTC · auto-refreshes every 2 hours_
 
 </details>
 <!-- MODELS:END -->

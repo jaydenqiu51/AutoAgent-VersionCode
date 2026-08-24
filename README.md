@@ -154,7 +154,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
 
-_All prices in USD ($) · Last updated: 2026-08-24 12:43 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-08-24 14:38 UTC · auto-refreshes every 2 hours_
 <!-- PRICING:END -->
 
 <!-- MODELS:START -->
@@ -334,7 +334,7 @@ _All prices in USD ($) · Last updated: 2026-08-24 12:43 UTC · auto-refreshes e
 | Kimi (Moonshot) | `kimi-k2.7-code` | $0.67 / $3.40 |
 | Kimi (Moonshot) | `kimi-k2.7-code-highspeed` | see provider site |
 | Kimi (Moonshot) | `kimi-k2.6` | $0.95 / $4.00 |
-| Kimi (Moonshot) | `kimi-k2.5` | $0.45 / $2.25 |
+| Kimi (Moonshot) | `kimi-k2.5` | $0.60 / $3.00 |
 | GLM (Zhipu AI) | `glm-4-flash` | **FREE** (with free key) |
 | GLM (Zhipu AI) | `glm-4-flashx` | **FREE** (with free key) |
 | GLM (Zhipu AI) | `glm-4.5-flash` | **FREE** (with free key) |
@@ -349,7 +349,7 @@ _All prices in USD ($) · Last updated: 2026-08-24 12:43 UTC · auto-refreshes e
 | GLM (Zhipu AI) | `glm-4v-plus` | see provider site |
 | GLM (Zhipu AI) | `glm-z1-air` | see provider site |
 
-_All prices in USD ($) · Last updated: 2026-08-24 12:43 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-08-24 14:38 UTC · auto-refreshes every 2 hours_
 
 </details>
 <!-- MODELS:END -->

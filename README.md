@@ -154,7 +154,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
 
-_All prices in USD ($) · Last updated: 2026-09-01 03:33 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-09-01 09:09 UTC · auto-refreshes every 2 hours_
 <!-- PRICING:END -->
 
 <!-- MODELS:START -->
@@ -256,7 +256,7 @@ _All prices in USD ($) · Last updated: 2026-09-01 03:33 UTC · auto-refreshes e
 | Together AI | `Llama-3.1-70B-Instruct-Turbo` | $0.40 / $0.40 |
 | Together AI | `Llama-3.1-8B-Instruct-Turbo` | $0.05 / $0.08 |
 | Together AI | `Llama-4-Maverick-17B-128E` | $0.20 / $0.70 |
-| Together AI | `Llama-4-Scout-17B-16E` | $0.11 / $0.34 |
+| Together AI | `Llama-4-Scout-17B-16E` | $0.10 / $0.30 |
 | Together AI | `Qwen2.5-72B-Instruct-Turbo` | $0.36 / $0.40 |
 | Together AI | `Qwen2.5-Coder-32B-Instruct` | $0.66 / $1.00 |
 | Together AI | `Qwen3-235B-A22B` | $0.45 / $1.82 |
@@ -272,7 +272,7 @@ _All prices in USD ($) · Last updated: 2026-09-01 03:33 UTC · auto-refreshes e
 | Fireworks | `llama-v3p1-70b-instruct` | $0.40 / $0.40 |
 | Fireworks | `llama-v3p1-8b-instruct` | $0.05 / $0.08 |
 | Fireworks | `llama4-maverick-instruct-basic` | $0.20 / $0.70 |
-| Fireworks | `llama4-scout-instruct-basic` | $0.11 / $0.34 |
+| Fireworks | `llama4-scout-instruct-basic` | $0.10 / $0.30 |
 | Fireworks | `qwen2p5-coder-32b-instruct` | $0.66 / $1.00 |
 | Fireworks | `qwen2p5-72b-instruct` | $0.36 / $0.40 |
 | Fireworks | `qwen3-235b-a22b` | $0.45 / $1.82 |
@@ -349,7 +349,7 @@ _All prices in USD ($) · Last updated: 2026-09-01 03:33 UTC · auto-refreshes e
 | GLM (Zhipu AI) | `glm-4v-plus` | see provider site |
 | GLM (Zhipu AI) | `glm-z1-air` | see provider site |
 
-_All prices in USD ($) · Last updated: 2026-09-01 03:33 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-09-01 09:09 UTC · auto-refreshes every 2 hours_
 
 </details>
 <!-- MODELS:END -->

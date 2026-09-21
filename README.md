@@ -154,7 +154,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
 
-_All prices in USD ($) · Last updated: 2026-09-21 09:35 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-09-21 16:11 UTC · auto-refreshes every 2 hours_
 <!-- PRICING:END -->
 
 <!-- MODELS:START -->
@@ -180,7 +180,7 @@ _All prices in USD ($) · Last updated: 2026-09-21 09:35 UTC · auto-refreshes e
 | OpenAI | `o3-pro` | $20.00 / $80.00 |
 | OpenAI | `o3-mini` | $1.10 / $4.40 |
 | OpenAI | `o4-mini` | $1.10 / $4.40 |
-| Anthropic | `claude-opus-4` | $15.00 / $75.00 |
+| Anthropic | `claude-opus-4` | see provider site |
 | Anthropic | `claude-sonnet-4` | $3.00 / $15.00 |
 | Anthropic | `claude-3-7-sonnet` | see provider site |
 | Anthropic | `claude-3-5-sonnet` | see provider site |
@@ -253,7 +253,7 @@ _All prices in USD ($) · Last updated: 2026-09-21 09:35 UTC · auto-refreshes e
 | Together AI | `DeepSeek-R1-Distill-Llama-70B-free` | **FREE** (with free key) |
 | Together AI | `Llama-3.3-70B-Instruct-Turbo` | $0.10 / $0.32 |
 | Together AI | `Llama-3.1-405B-Instruct-Turbo` | see provider site |
-| Together AI | `Llama-3.1-70B-Instruct-Turbo` | $0.72 / $0.72 |
+| Together AI | `Llama-3.1-70B-Instruct-Turbo` | $0.40 / $0.40 |
 | Together AI | `Llama-3.1-8B-Instruct-Turbo` | $0.05 / $0.08 |
 | Together AI | `Llama-4-Maverick-17B-128E` | $0.20 / $0.80 |
 | Together AI | `Llama-4-Scout-17B-16E` | $0.10 / $0.30 |
@@ -269,7 +269,7 @@ _All prices in USD ($) · Last updated: 2026-09-21 09:35 UTC · auto-refreshes e
 | Together AI | `gemma-2-27b-it` | $0.65 / $0.65 |
 | Fireworks | `llama-v3p3-70b-instruct` | $0.10 / $0.32 |
 | Fireworks | `llama-v3p1-405b-instruct` | see provider site |
-| Fireworks | `llama-v3p1-70b-instruct` | $0.72 / $0.72 |
+| Fireworks | `llama-v3p1-70b-instruct` | $0.40 / $0.40 |
 | Fireworks | `llama-v3p1-8b-instruct` | $0.05 / $0.08 |
 | Fireworks | `llama4-maverick-instruct-basic` | $0.20 / $0.80 |
 | Fireworks | `llama4-scout-instruct-basic` | $0.10 / $0.30 |
@@ -311,7 +311,7 @@ _All prices in USD ($) · Last updated: 2026-09-21 09:35 UTC · auto-refreshes e
 | OpenRouter | `openai/gpt-4o` | $2.50 / $10.00 |
 | OpenRouter | `openai/gpt-4.1` | $2.00 / $8.00 |
 | OpenRouter | `anthropic/claude-sonnet-4` | $3.00 / $15.00 |
-| OpenRouter | `anthropic/claude-opus-4` | $15.00 / $75.00 |
+| OpenRouter | `anthropic/claude-opus-4` | see provider site |
 | OpenRouter | `google/gemini-2.5-pro` | $1.25 / $10.00 |
 | OpenRouter | `google/gemini-2.5-flash` | $0.30 / $2.50 |
 | OpenRouter | `x-ai/grok-4` | see provider site |
@@ -349,7 +349,7 @@ _All prices in USD ($) · Last updated: 2026-09-21 09:35 UTC · auto-refreshes e
 | GLM (Zhipu AI) | `glm-4v-plus` | see provider site |
 | GLM (Zhipu AI) | `glm-z1-air` | see provider site |
 
-_All prices in USD ($) · Last updated: 2026-09-21 09:35 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-09-21 16:11 UTC · auto-refreshes every 2 hours_
 
 </details>
 <!-- MODELS:END -->

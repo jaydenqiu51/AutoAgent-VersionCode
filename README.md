@@ -141,7 +141,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **OpenRouter** | 100+ models, many `:free` | **FREE** (`:free` models) and up | Free key | [openrouter.ai/keys](https://openrouter.ai/keys) |
 | **DeepSeek** | deepseek-chat | $0.29 / $1.14 | Paid key | [platform.deepseek.com](https://platform.deepseek.com) |
 | **Qwen (Alibaba)** | qwen-plus | $0.26 / $0.78 | Paid key | [dashscope.aliyun.com](https://dashscope.console.aliyun.com) |
-| **Kimi (Moonshot)** | kimi-k3 | $0.50 / $15.00 | Paid key | [platform.moonshot.cn](https://platform.moonshot.cn) |
+| **Kimi (Moonshot)** | kimi-k3 | $0.62 / $12.30 | Paid key | [platform.moonshot.cn](https://platform.moonshot.cn) |
 |  | kimi-k2.7-code | $0.67 / $3.35 |  |  |
 | **Together AI** | Llama 3.3 70B Turbo | $0.88 / $0.88 (+ free models) | Key (has free models) | [together.ai](https://together.ai) |
 | **Fireworks** | Llama 3.3 70B | $0.90 / $0.90 | Paid key | [fireworks.ai](https://fireworks.ai) |
@@ -154,7 +154,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
 
-_All prices in USD ($) · Last updated: 2026-10-08 00:00 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-10-08 08:24 UTC · auto-refreshes every 2 hours_
 <!-- PRICING:END -->
 
 <!-- MODELS:START -->
@@ -251,7 +251,7 @@ _All prices in USD ($) · Last updated: 2026-10-08 00:00 UTC · auto-refreshes e
 | Groq | `allam-2-7b` | **FREE** (with free key) |
 | Together AI | `Llama-3.3-70B-Instruct-Turbo-Free` | **FREE** (with free key) |
 | Together AI | `DeepSeek-R1-Distill-Llama-70B-free` | **FREE** (with free key) |
-| Together AI | `Llama-3.3-70B-Instruct-Turbo` | $0.22 / $0.50 |
+| Together AI | `Llama-3.3-70B-Instruct-Turbo` | $0.10 / $0.32 |
 | Together AI | `Llama-3.1-405B-Instruct-Turbo` | see provider site |
 | Together AI | `Llama-3.1-70B-Instruct-Turbo` | $0.40 / $0.40 |
 | Together AI | `Llama-3.1-8B-Instruct-Turbo` | $0.05 / $0.08 |
@@ -267,7 +267,7 @@ _All prices in USD ($) · Last updated: 2026-10-08 00:00 UTC · auto-refreshes e
 | Together AI | `Mixtral-8x22B-Instruct` | $2.00 / $6.00 |
 | Together AI | `Mistral-Small-24B-Instruct` | $0.05 / $0.08 |
 | Together AI | `gemma-2-27b-it` | $0.65 / $0.65 |
-| Fireworks | `llama-v3p3-70b-instruct` | $0.22 / $0.50 |
+| Fireworks | `llama-v3p3-70b-instruct` | $0.10 / $0.32 |
 | Fireworks | `llama-v3p1-405b-instruct` | see provider site |
 | Fireworks | `llama-v3p1-70b-instruct` | $0.40 / $0.40 |
 | Fireworks | `llama-v3p1-8b-instruct` | $0.05 / $0.08 |
@@ -316,9 +316,9 @@ _All prices in USD ($) · Last updated: 2026-10-08 00:00 UTC · auto-refreshes e
 | OpenRouter | `google/gemini-2.5-flash` | $0.30 / $2.50 |
 | OpenRouter | `x-ai/grok-4` | see provider site |
 | OpenRouter | `deepseek/deepseek-chat-v3-0324` | $0.29 / $1.14 |
-| OpenRouter | `moonshotai/kimi-k3` | $0.50 / $15.00 |
+| OpenRouter | `moonshotai/kimi-k3` | $0.62 / $12.30 |
 | OpenRouter | `moonshotai/kimi-k2.7-code` | $0.67 / $3.35 |
-| OpenRouter | `meta-llama/llama-3.3-70b-instruct` | $0.22 / $0.50 |
+| OpenRouter | `meta-llama/llama-3.3-70b-instruct` | $0.10 / $0.32 |
 | OpenRouter | `mistralai/mistral-large-2411` | see provider site |
 | Qwen (Alibaba) | `qwen-max` | see provider site |
 | Qwen (Alibaba) | `qwen-plus` | $0.26 / $0.78 |
@@ -330,7 +330,7 @@ _All prices in USD ($) · Last updated: 2026-10-08 00:00 UTC · auto-refreshes e
 | Qwen (Alibaba) | `qwen-vl-plus` | see provider site |
 | Qwen (Alibaba) | `qwen-math-plus` | see provider site |
 | Qwen (Alibaba) | `qwq-plus` | see provider site |
-| Kimi (Moonshot) | `kimi-k3` | $0.50 / $15.00 |
+| Kimi (Moonshot) | `kimi-k3` | $0.62 / $12.30 |
 | Kimi (Moonshot) | `kimi-k2.7-code` | $0.67 / $3.35 |
 | Kimi (Moonshot) | `kimi-k2.7-code-highspeed` | see provider site |
 | Kimi (Moonshot) | `kimi-k2.6` | $0.46 / $2.45 |
@@ -349,7 +349,7 @@ _All prices in USD ($) · Last updated: 2026-10-08 00:00 UTC · auto-refreshes e
 | GLM (Zhipu AI) | `glm-4v-plus` | see provider site |
 | GLM (Zhipu AI) | `glm-z1-air` | see provider site |
 
-_All prices in USD ($) · Last updated: 2026-10-08 00:00 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-10-08 08:24 UTC · auto-refreshes every 2 hours_
 
 </details>
 <!-- MODELS:END -->

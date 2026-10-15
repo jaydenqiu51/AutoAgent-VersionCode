@@ -154,7 +154,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
 
-_All prices in USD ($) · Last updated: 2026-10-15 08:50 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-10-15 14:39 UTC · auto-refreshes every 2 hours_
 <!-- PRICING:END -->
 
 <!-- MODELS:START -->
@@ -181,7 +181,7 @@ _All prices in USD ($) · Last updated: 2026-10-15 08:50 UTC · auto-refreshes e
 | OpenAI | `o3-mini` | $1.10 / $4.40 |
 | OpenAI | `o4-mini` | $1.10 / $4.40 |
 | Anthropic | `claude-opus-4` | see provider site |
-| Anthropic | `claude-sonnet-4` | $3.00 / $15.00 |
+| Anthropic | `claude-sonnet-4` | see provider site |
 | Anthropic | `claude-3-7-sonnet` | see provider site |
 | Anthropic | `claude-3-5-sonnet` | see provider site |
 | Anthropic | `claude-3-5-sonnet-20240620` | see provider site |
@@ -310,7 +310,7 @@ _All prices in USD ($) · Last updated: 2026-10-15 08:50 UTC · auto-refreshes e
 | OpenRouter | `glm-4.5-air:free` | **FREE** (with free key) |
 | OpenRouter | `openai/gpt-4o` | $2.50 / $10.00 |
 | OpenRouter | `openai/gpt-4.1` | $2.00 / $8.00 |
-| OpenRouter | `anthropic/claude-sonnet-4` | $3.00 / $15.00 |
+| OpenRouter | `anthropic/claude-sonnet-4` | see provider site |
 | OpenRouter | `anthropic/claude-opus-4` | see provider site |
 | OpenRouter | `google/gemini-2.5-pro` | $1.25 / $10.00 |
 | OpenRouter | `google/gemini-2.5-flash` | $0.30 / $2.50 |
@@ -349,7 +349,7 @@ _All prices in USD ($) · Last updated: 2026-10-15 08:50 UTC · auto-refreshes e
 | GLM (Zhipu AI) | `glm-4v-plus` | see provider site |
 | GLM (Zhipu AI) | `glm-z1-air` | see provider site |
 
-_All prices in USD ($) · Last updated: 2026-10-15 08:50 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-10-15 14:39 UTC · auto-refreshes every 2 hours_
 
 </details>
 <!-- MODELS:END -->

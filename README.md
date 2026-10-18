@@ -154,7 +154,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
 
-_All prices in USD ($) · Last updated: 2026-10-17 23:43 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-10-18 03:00 UTC · auto-refreshes every 2 hours_
 <!-- PRICING:END -->
 
 <!-- MODELS:START -->
@@ -196,7 +196,7 @@ _All prices in USD ($) · Last updated: 2026-10-17 23:43 UTC · auto-refreshes e
 | Google Gemini | `gemini-2.0-flash-thinking-exp` | **FREE** (with free key) |
 | Google Gemini | `gemini-1.5-flash` | **FREE** (with free key) |
 | Google Gemini | `gemini-1.5-flash-8b` | **FREE** (with free key) |
-| Google Gemini | `gemma-3-27b-it` | **FREE tier** (paid: $0.08 / $0.45) |
+| Google Gemini | `gemma-3-27b-it` | **FREE tier** (paid: $0.08 / $0.35) |
 | Google Gemini | `gemini-2.5-pro` | $1.25 / $10.00 |
 | Google Gemini | `gemini-1.5-pro` | see provider site |
 | Ollama (local) | `llama3.3` | **FREE — No API Key needed** |
@@ -349,7 +349,7 @@ _All prices in USD ($) · Last updated: 2026-10-17 23:43 UTC · auto-refreshes e
 | GLM (Zhipu AI) | `glm-4v-plus` | see provider site |
 | GLM (Zhipu AI) | `glm-z1-air` | see provider site |
 
-_All prices in USD ($) · Last updated: 2026-10-17 23:43 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-10-18 03:00 UTC · auto-refreshes every 2 hours_
 
 </details>
 <!-- MODELS:END -->

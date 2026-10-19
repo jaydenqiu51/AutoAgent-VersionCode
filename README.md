@@ -154,7 +154,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
 
-_All prices in USD ($) · Last updated: 2026-10-19 09:35 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-10-19 16:46 UTC · auto-refreshes every 2 hours_
 <!-- PRICING:END -->
 
 <!-- MODELS:START -->
@@ -235,7 +235,7 @@ _All prices in USD ($) · Last updated: 2026-10-19 09:35 UTC · auto-refreshes e
 | Ollama (local) | `olmo2` | **FREE — No API Key needed** |
 | Ollama (local) | `openthinker` | **FREE — No API Key needed** |
 | DeepSeek | `deepseek-chat` | $0.29 / $1.14 |
-| DeepSeek | `deepseek-reasoner` | $0.70 / $2.50 |
+| DeepSeek | `deepseek-reasoner` | see provider site |
 | Groq | `llama-3.3-70b-versatile` | **FREE** (with free key) |
 | Groq | `llama-3.1-8b-instant` | **FREE** (with free key) |
 | Groq | `llama3-70b-8192` | **FREE** (with free key) |
@@ -262,7 +262,7 @@ _All prices in USD ($) · Last updated: 2026-10-19 09:35 UTC · auto-refreshes e
 | Together AI | `Qwen3-235B-A22B` | see provider site |
 | Together AI | `QwQ-32B` | see provider site |
 | Together AI | `DeepSeek-V3` | $0.29 / $1.14 |
-| Together AI | `DeepSeek-R1` | $0.70 / $2.50 |
+| Together AI | `DeepSeek-R1` | see provider site |
 | Together AI | `Mixtral-8x7B-Instruct` | see provider site |
 | Together AI | `Mixtral-8x22B-Instruct` | $2.00 / $6.00 |
 | Together AI | `Mistral-Small-24B-Instruct` | $0.05 / $0.08 |
@@ -278,7 +278,7 @@ _All prices in USD ($) · Last updated: 2026-10-19 09:35 UTC · auto-refreshes e
 | Fireworks | `qwen3-235b-a22b` | see provider site |
 | Fireworks | `qwq-32b` | see provider site |
 | Fireworks | `deepseek-v3` | $0.29 / $1.14 |
-| Fireworks | `deepseek-r1` | $0.70 / $2.50 |
+| Fireworks | `deepseek-r1` | see provider site |
 | Fireworks | `mixtral-8x22b-instruct` | $2.00 / $6.00 |
 | Fireworks | `mistral-small-24b-instruct` | $0.05 / $0.08 |
 | Perplexity | `sonar` | $1.00 / $1.00 |
@@ -349,7 +349,7 @@ _All prices in USD ($) · Last updated: 2026-10-19 09:35 UTC · auto-refreshes e
 | GLM (Zhipu AI) | `glm-4v-plus` | see provider site |
 | GLM (Zhipu AI) | `glm-z1-air` | see provider site |
 
-_All prices in USD ($) · Last updated: 2026-10-19 09:35 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-10-19 16:46 UTC · auto-refreshes every 2 hours_
 
 </details>
 <!-- MODELS:END -->

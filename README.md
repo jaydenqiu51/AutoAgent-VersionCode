@@ -154,7 +154,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
 
-_All prices in USD ($) · Last updated: 2026-10-24 17:11 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-10-24 20:12 UTC · auto-refreshes every 2 hours_
 <!-- PRICING:END -->
 
 <!-- MODELS:START -->
@@ -172,7 +172,7 @@ _All prices in USD ($) · Last updated: 2026-10-24 17:11 UTC · auto-refreshes e
 | OpenAI | `gpt-4.5-preview` | see provider site |
 | OpenAI | `gpt-4-turbo` | $10.00 / $30.00 |
 | OpenAI | `gpt-4` | $30.00 / $60.00 |
-| OpenAI | `gpt-3.5-turbo` | $0.50 / $1.50 |
+| OpenAI | `gpt-3.5-turbo` | see provider site |
 | OpenAI | `o1` | $15.00 / $60.00 |
 | OpenAI | `o1-mini` | see provider site |
 | OpenAI | `o1-pro` | $150.00 / $600.00 |
@@ -349,7 +349,7 @@ _All prices in USD ($) · Last updated: 2026-10-24 17:11 UTC · auto-refreshes e
 | GLM (Zhipu AI) | `glm-4v-plus` | see provider site |
 | GLM (Zhipu AI) | `glm-z1-air` | see provider site |
 
-_All prices in USD ($) · Last updated: 2026-10-24 17:11 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-10-24 20:12 UTC · auto-refreshes every 2 hours_
 
 </details>
 <!-- MODELS:END -->

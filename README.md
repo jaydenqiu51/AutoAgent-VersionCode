@@ -154,7 +154,7 @@ Prices are **per 1 million tokens** (input / output), in **US Dollars (USD $)**.
 | **Perplexity** | sonar-pro | $3.00 / $15.00 (+ search fees) | Paid key | [perplexity.ai](https://docs.perplexity.ai) |
 | **xAI (Grok)** | grok-3 | $3.00 / $15.00 | Paid key | [x.ai/api](https://x.ai/api) |
 
-_All prices in USD ($) · Last updated: 2026-11-08 12:44 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-11-08 18:38 UTC · auto-refreshes every 2 hours_
 <!-- PRICING:END -->
 
 <!-- MODELS:START -->
@@ -254,7 +254,7 @@ _All prices in USD ($) · Last updated: 2026-11-08 12:44 UTC · auto-refreshes e
 | Together AI | `Llama-3.3-70B-Instruct-Turbo` | $0.59 / $0.79 |
 | Together AI | `Llama-3.1-405B-Instruct-Turbo` | see provider site |
 | Together AI | `Llama-3.1-70B-Instruct-Turbo` | $0.72 / $0.72 |
-| Together AI | `Llama-3.1-8B-Instruct-Turbo` | $0.05 / $0.08 |
+| Together AI | `Llama-3.1-8B-Instruct-Turbo` | $0.02 / $0.04 |
 | Together AI | `Llama-4-Maverick-17B-128E` | $0.35 / $1.00 |
 | Together AI | `Llama-4-Scout-17B-16E` | $0.10 / $0.30 |
 | Together AI | `Qwen2.5-72B-Instruct-Turbo` | $0.36 / $0.40 |
@@ -270,7 +270,7 @@ _All prices in USD ($) · Last updated: 2026-11-08 12:44 UTC · auto-refreshes e
 | Fireworks | `llama-v3p3-70b-instruct` | $0.59 / $0.79 |
 | Fireworks | `llama-v3p1-405b-instruct` | see provider site |
 | Fireworks | `llama-v3p1-70b-instruct` | $0.72 / $0.72 |
-| Fireworks | `llama-v3p1-8b-instruct` | $0.05 / $0.08 |
+| Fireworks | `llama-v3p1-8b-instruct` | $0.02 / $0.04 |
 | Fireworks | `llama4-maverick-instruct-basic` | $0.35 / $1.00 |
 | Fireworks | `llama4-scout-instruct-basic` | $0.10 / $0.30 |
 | Fireworks | `qwen2p5-coder-32b-instruct` | $0.66 / $1.00 |
@@ -349,7 +349,7 @@ _All prices in USD ($) · Last updated: 2026-11-08 12:44 UTC · auto-refreshes e
 | GLM (Zhipu AI) | `glm-4v-plus` | see provider site |
 | GLM (Zhipu AI) | `glm-z1-air` | see provider site |
 
-_All prices in USD ($) · Last updated: 2026-11-08 12:44 UTC · auto-refreshes every 2 hours_
+_All prices in USD ($) · Last updated: 2026-11-08 18:38 UTC · auto-refreshes every 2 hours_
 
 </details>
 <!-- MODELS:END -->
